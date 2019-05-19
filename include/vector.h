@@ -107,10 +107,38 @@ namespace sc{
 
 		public:
 			//=== Operators overload
+			/// Operator= overload for vectors
+			vector& operator=( vector& other )
+			{
+				if( m_size != initial_size )
+					delete arr;
 
-			vector& operator=( vector& other );
+				this->m_capacity = other.capacity();
+				this->m_size = other.size();
+				this->arr = new T[m_capacity];
 
-			vector& operator=( std::initializer_list<T> ilist );
+				for( size_type i{0u} ; i < m_size ; i++ )
+					arr[i] = other[i];
+
+				return other;
+			}
+
+			/// Operator= overload for initializer_list
+			vector& operator=( std::initializer_list<T> ilist )
+			{
+				if( m_size != initial_size )
+					delete arr;
+
+				this->m_capacity = ilist.size() * 2;
+				this->m_size = ilist.size();
+				this->arr = new T[m_capacity];
+
+				size_type count{0};
+				for( const int& e : ilist )
+					arr[count++] = e;
+
+				return *this;
+			}
 
 			//bool operator==( const vector& lhs, const vector& rhs );
 
