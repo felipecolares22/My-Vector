@@ -18,6 +18,6 @@ include_directories( include )
 
 #=== Main App ===
 #However, the file(GLOB...) allows for wildcard additions:
-file(GLOB SOURCES "src/*.cpp", "test/*.cpp")
+file(GLOB SOURCES "test/*.cpp")
 
 add_executable(vector_tests ${SOURCES})
