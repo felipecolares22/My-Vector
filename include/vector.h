@@ -91,7 +91,7 @@ namespace sc{
 
 			void assign( size_type count, const T & value );
 
-			// Return de object at the index pos
+			// Return the object at the index position.
 			T & operator[]( size_type pos )
 			{return arr[pos];}
 
@@ -117,7 +117,7 @@ namespace sc{
 			//bool operator!=( const vector& lhs, const vector& rhs );
 
 		private:
-			size_type m_capacity; //!< capacity of the array (memory alocated).
+			size_type m_capacity; //!< capacity of the array (alocated memory).
 			size_type m_size; //!< size of the array.
 			T * arr; //<! T type array pointer.
 			
