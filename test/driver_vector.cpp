@@ -38,6 +38,21 @@ int main(){
 	std::cout << "capacity: " << vct4.capacity() << std::endl;
 	std::cout << vct4[0] << " " << vct4[1] << " " << vct4[2] << " " << vct4[3] << std::endl;
 
+	// initializer_list constructor
+	std::cout << ">>> Initializer_list constructor:\n";
+	vector<int> vct5 {2, 4, 6};
+	std::cout << "Size:     " << vct5.size() << std::endl;
+	std::cout << "capacity: " << vct5.capacity() << std::endl;
+	std::cout << vct5[0] << " " << vct5[1] << " " << vct5[2] << std::endl;
+
+	// operator= 
+	// std::cout << ">>> operator= (vector):\n";
+	// vector<int> vct6
+	// vct6 = vct5;
+	// std::cout << "Size:     " << vct6.size() << std::endl;
+	// std::cout << "capacity: " << vct6.capacity() << std::endl;
+	// std::cout << vct6[0] << " " << vct6[1] << " " << vct6[2] << std::endl;
+
 
 	/*******************************************
 								    ENDING TESTS								

@@ -14,7 +14,7 @@ namespace sc{
     	This class try to implement we own vector.
 	*/
 	template< typename T >
-	class vector {
+	class vector{
 
 		private:
 			//=== Alias
@@ -53,17 +53,19 @@ namespace sc{
 			}
 
 			/// std::initializer_list copy constructor
-			vector( std::initializer_list<T> ilist );
+			vector( std::initializer_list<T> ilist )
+				: m_capacity{ilist.size() * 2}, m_size{ilist.size()}, arr{new T[m_capacity]}
+			{
+				size_type count{0};
+				for( const int& e : ilist )
+					arr[count++] = e;
+			}
 
 			/// Destructor
 			~vector( )
 			{
 				delete arr;
 			}
-
-			vector& operator=( const vector& other );
-
-			vector& operator=( std::initializer_list<T> ilist );
 
 		public:
 			//=== Operations
@@ -106,6 +108,10 @@ namespace sc{
 		public:
 			//=== Operators overload
 
+			vector& operator=( vector& other );
+
+			vector& operator=( std::initializer_list<T> ilist );
+
 			//bool operator==( const vector& lhs, const vector& rhs );
 
 			//bool operator!=( const vector& lhs, const vector& rhs );
@@ -114,6 +120,7 @@ namespace sc{
 			size_type m_capacity; //!< capacity of the array (memory alocated).
 			size_type m_size; //!< size of the array.
 			T * arr; //<! T type array pointer.
+			
 	}; // class vector
 
 } // namespace sc
