@@ -11,7 +11,7 @@ namespace sc{
 	/*! \class Vector
     	\brief means like std::vector
 
-    	This class try to implement we own vector.
+    	With this class we try to implement our own vector.
 	*/
 	template< typename T >
 	class vector{
