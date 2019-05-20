@@ -204,13 +204,14 @@ namespace sc{
 	/*! \class my_iterator
 		
 		With this class we're trying to implement an iterator class for vectors.
-	*/
+
 	template< typename T >
 	class my_iterator{
 		public:
 			//=== Alias
+			typedef size_t size_type; //!< Type of size.
 			using iterator = my_iterator< T >;
-			using const_iterator = my_iterator < const T >
+			using const_iterator = my_iterator < const T >;
 			
 			//=== Constructor
 			my_iterator();
@@ -231,7 +232,7 @@ namespace sc{
 			template< typename InItr >
 			iterator insert( iterator pos, InItr first, InItr last );
 
-			iterator insert( const_iterator pos, std::initializer_list< T >, ilist );
+			iterator insert( const_iterator pos, std::initializer_list< T > ilist );
 
 			iterator erase( iterator pos );
 
@@ -250,7 +251,7 @@ namespace sc{
 			template< typename InItr >
 			const iterator insert( iterator pos, InItr first, InItr last );
 
-			const iterator insert( const_iterator pos, std::initializer_list< T >, ilist );
+			const iterator insert( const_iterator pos, std::initializer_list< T > ilist );
 
 			const iterator erase( iterator pos );
 
@@ -275,7 +276,7 @@ namespace sc{
 			pointer operator->();
 			bool operator==();
 			bool operator!=();
-	} // class my_iterator
+	}; // class my_iterator */
 
 } // namespace sc
 
