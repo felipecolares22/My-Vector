@@ -2,6 +2,7 @@
 #define VECTOR_H
 
 #include <iostream>
+#include <stdexcept>
 
 /*! \namespace sc
     \brief namespace to differ from std
@@ -68,14 +69,24 @@ namespace sc{
 			}
 
 		public:
-			//=== Operations
+			//=== Methods
 			/// Return the size of array.
 			size_type size( ) const
 			{return this->m_size;}
 
-			void clear( );
+			/// Delete all array elements;
+			void clear( )
+			{
+				delete arr;
 
-			bool empty( );
+				this->m_capacity = initial_capacity;
+				this->m_size = initial_size;
+				this->arr = new T[m_capacity];
+			}
+
+			/// Checks if the array is empty
+			bool empty( )
+			{return m_size == initial_size;}
 
 			void push_front( const T & value );
 
@@ -91,19 +102,53 @@ namespace sc{
 
 			void assign( size_type count, const T & value );
 
-			// Return the object at the index position.
+			/// Return the object at the index position.
 			T & operator[]( size_type pos )
 			{return arr[pos];}
 
-			T & at( size_type pos );
+			T & at( size_type pos )
+			{
+				if( not (pos < m_size and pos >= 0) )
+					throw std::out_of_range("error in at(): out of range");
+				else
+					return arr[pos];
+			}
 
 			/// Return the capacity of array.
 			size_type capacity( ) const
 			{return m_capacity;}
 
-			void reserve( size_type new_cap );
+			/// Realoc the storage to new_cap
+			void reserve( size_type new_cap )
+			{
+				if( new_cap <= m_capacity )
+					return;
 
-			void shrink_to_fit( );			
+				vector<T> aux = *this;
+
+				delete arr;
+				this->m_capacity = new_cap;
+				this->arr = new T[m_capacity];
+
+				for( size_type i{0u} ; i < m_size ; i++ )
+					arr[i] = aux[i];
+			}
+
+			/// Desaloc unused storage
+			void shrink_to_fit( )
+			{
+				if( m_size == m_capacity )
+					return;
+
+				vector<T> aux = *this;
+				
+				delete arr;
+				this->m_capacity = m_size;
+				this->arr = new T[m_capacity];
+
+				for( size_type i{0u} ; i < m_size ; i++ )
+					arr[i] = aux[i];
+			}			
 
 		public:
 			//=== Operators overload

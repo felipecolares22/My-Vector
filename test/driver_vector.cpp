@@ -87,7 +87,55 @@ int main(){
 	std::cout << "capacity: " << vct9.capacity() << std::endl;
 	std::cout << vct9[0] << " " << vct9[1] << " " << vct9[2] << std::endl;
 
+	std::cout << std::endl;
 
+	// clear and empty
+	std::cout << ">>> Clear and empty methods:\n";
+	std::cout << "Checking if VCT9 is empty: " << vct9.empty() << std::endl;
+	std::cout << "Cleaning VCT9:\n";
+	vct9.clear();
+	std::cout << "Checking if VCT9 is empty: " << vct9.empty() << std::endl;
+	std::cout << "Size:     " << vct9.size() << std::endl;
+	std::cout << "capacity: " << vct9.capacity() << std::endl;
+
+	std::cout << std::endl;
+
+	// at() method
+	std::cout << ">>> At() method:\n";
+	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
+	std::cout << "vct8.at(1): " << vct8.at(1) << std::endl;
+	try
+	{
+		std::cout << "vct8.at(10): " << vct8.at(10) << std::endl;
+	} catch(const std::out_of_range& e) {
+		std::cout << "Entrou no catch\n"; 
+	}
+
+	std::cout << std::endl;
+
+	// reserve() method
+	std::cout << ">>> reserve() method:\n";
+	std::cout << "Size:     " << vct8.size() << std::endl;
+	std::cout << "capacity: " << vct8.capacity() << std::endl;
+	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
+	std::cout << "using reserve(10)...\n";
+	vct8.reserve(10);
+	std::cout << "Size:     " << vct8.size() << std::endl;
+	std::cout << "capacity: " << vct8.capacity() << std::endl;
+	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
+
+	std::cout << std::endl;
+
+	//shrink_to_fit() method
+	std::cout << ">>> shrink_to_fit() method:\n";
+	std::cout << "Size:     " << vct8.size() << std::endl;
+	std::cout << "capacity: " << vct8.capacity() << std::endl;
+	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
+	std::cout << "using shrink_to_fit...\n";
+	vct8.shrink_to_fit();
+	std::cout << "Size:     " << vct8.size() << std::endl;
+	std::cout << "capacity: " << vct8.capacity() << std::endl;
+	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
 
 	/*******************************************
 								    ENDING TESTS								
