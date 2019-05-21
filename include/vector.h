@@ -10,7 +10,7 @@
 namespace sc{
 
 	template< typename T >
-	class my_iterator;	
+	class my_iterator;
 	
 	/*! \class Vector
     	\brief means like std::vector
@@ -23,7 +23,7 @@ namespace sc{
 		protected:
 			//=== Alias
 			typedef size_t size_type; //!< Type of size.
-			static constexpr size_type initial_capacity=1; //!< Default value is 1.
+			static constexpr size_type initial_capacity=0; //!< Default value is 0.
 			static constexpr size_type initial_size=0; //!< Default value is 0.
 
 		public:
@@ -71,6 +71,20 @@ namespace sc{
 				delete arr;
 			}
 
+			//=== Iterators
+			my_iterator< T > begin()
+			{
+				return arr;
+			}
+			my_iterator< T > end()
+			{
+				return &arr[m_size];
+			}
+			my_iterator < const T > cbegin() const;
+			my_iterator < const T > cend() const;
+
+
+
 		public:
 			//=== Methods
 			/// Return the size of array.
@@ -82,7 +96,6 @@ namespace sc{
 			{
 				delete arr;
 
-				this->m_capacity = initial_capacity;
 				this->m_size = initial_size;
 				this->arr = new T[m_capacity];
 			}
@@ -235,7 +248,7 @@ namespace sc{
 		protected:
 			size_type m_capacity; //!< capacity of the array (alocated memory).
 			size_type m_size; //!< size of the array.
-			T * arr; //<! T type array pointer.
+			T * arr; //!< T type array pointer.
 		
 		public:
 		/*! \class my_iterator
@@ -244,6 +257,10 @@ namespace sc{
 		*/
 		template < typename iT >
 		class my_iterator{
+			private:
+				iT * it; //!< Iterator pointer
+				typedef my_iterator<iT> iterator; 
+
 			public:
 				//=== Alias
 				typedef size_t size_type; //!< Type of size.
@@ -253,16 +270,6 @@ namespace sc{
 
 				//=== Destructor
 				~my_iterator();
-
-				//=== Methods
-				my_iterator< iT > begin()
-				{
-					return arr;
-				}
-				my_iterator< iT > end()
-				{
-					return &arr[m_size];
-				}
 
 				//=== Operations
 				my_iterator< iT > insert ( my_iterator< iT > pos, const iT & value );
@@ -305,6 +312,10 @@ namespace sc{
 		
 		template< typename CiT >
 		class my_constiterator{
+			private:
+				Cit * it; //!< Constant iterator pointer
+				typedef my_constiterator const_iterator;
+
 			public:
 				//=== Alias
 				typedef size_t size_type; //!< Type of Size
@@ -314,10 +325,6 @@ namespace sc{
 
 				//=== Destructor
 				~my_constiterator();
-
-				//=== Methods
-				my_iterator < const CiT > cbegin() const;
-				my_iterator < const CiT > cend() const;
 
 				//=== Const Operations
 				const my_constiterator< CiT > insert( my_iterator< CiT > pos, const CiT & value );
