@@ -188,9 +188,31 @@ namespace sc{
 				return *this;
 			}
 
-			//bool operator==( const vector& lhs, const vector& rhs );
+			bool operator==( const vector& rhs )
+			{
+				if( this.size() == rhs.size() )
+				{
+					for(int i=0; i<(int)this.size(); i++)
+					{
+						if(this[i] != rhs[i]) return false;
+					}
+					return true;
+				}
+				else return false;
+			}
 
-			//bool operator!=( const vector& lhs, const vector& rhs );
+			bool operator!=( const vector& rhs )
+			{
+				if( this.size() == rhs.size() )
+				{
+					for(int i=0; i<(int)this.size(); i++)
+					{
+						if(this[i] != rhs[i]) return true;
+					}
+					return false;
+				}
+				else return true;
+			}
 			
 			
 		protected:
@@ -202,7 +224,7 @@ namespace sc{
 			
 			With this class we're trying to implement an iterator class for vectors.
 		*/
-		template < typename iT>
+		template < typename iT >
 		class my_iterator{
 			public:
 				//=== Alias
