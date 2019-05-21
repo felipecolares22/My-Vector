@@ -95,9 +95,24 @@ namespace sc{
 
 			void push_back( const T & value );
 
-			void pop_back( );
+			void pop_back( )
+			{
+				m_size--;
+			}
 
-			void pop_front( );
+			void pop_front( )
+			{
+				vector<T> aux = *this;
+				delete arr;
+				
+				this->m_capacity = m_size
+				this->arr = new T[m_capacity];
+				for( size_type i{0u}; i < (m_size-1); i++ )
+				{
+					arr[i] = aux[i]
+				}
+		
+			}
 
 			const T & back( ) const;
 
@@ -237,10 +252,16 @@ namespace sc{
 
 				//=== Destructor
 				~my_iterator();
-				
+
 				//=== Methods
-				my_iterator< iT > begin();
-				my_iterator< iT > end();
+				my_iterator< iT > begin()
+				{
+					return arr;
+				}
+				my_iterator< iT > end()
+				{
+					return &arr[m_size];
+				}
 
 				//=== Operations
 				my_iterator< iT > insert ( my_iterator< iT > pos, const iT & value );
