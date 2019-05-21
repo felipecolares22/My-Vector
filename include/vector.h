@@ -237,6 +237,7 @@ namespace sc{
 			size_type m_size; //!< size of the array.
 			T * arr; //<! T type array pointer.
 		
+		public:
 		/*! \class my_iterator
 			
 			With this class we're trying to implement an iterator class for vectors.
