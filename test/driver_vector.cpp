@@ -137,6 +137,18 @@ int main(){
 	std::cout << "capacity: " << vct8.capacity() << std::endl;
 	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
 
+	// operator == and !=
+	std::cout << ">>> == and != operators:\n";
+	vector<int> v1 = {1, 2, 3};
+	vector<int> v2 = v1;
+	std::cout << ">Using v1 = v2:\ntesting v1 == v2: " << (v1 == v2) << std::endl;
+	std::cout << "testing v1 != v2: " << (v1 != v2) << std::endl;
+	std::cout << ">Using v2.clear()...\n";
+	v2.clear();
+	std::cout << "testing v1 == v2: " << (v1 == v2) << std::endl;
+	std::cout << "testing v1 != v2: " << (v1 != v2) << std::endl;
+
+
 	/*******************************************
 								    ENDING TESTS								
 	*******************************************/

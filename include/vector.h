@@ -49,11 +49,11 @@ namespace sc{
 			}
 
 			/// Copy constructor
-			vector( vector& other )
+			vector( const vector& other )
 				: m_capacity{other.capacity()}, m_size{other.size()}, arr{new T[m_capacity]}
 			{
 				for( size_type i{0u} ; i < m_size ; i++ )
-					arr[i] = other[i];
+					arr[i] = other.arr[i];
 			}
 
 			/// std::initializer_list copy constructor
@@ -190,11 +190,11 @@ namespace sc{
 
 			bool operator==( const vector& rhs )
 			{
-				if( this.size() == rhs.size() )
+				if( this->m_size == rhs.size() )
 				{
-					for(int i=0; i<(int)this.size(); i++)
+					for(int i=0; i<(int)this->m_size; i++)
 					{
-						if(this[i] != rhs[i]) return false;
+						if(this->arr[i] != rhs.arr[i]) return false;
 					}
 					return true;
 				}
@@ -203,11 +203,11 @@ namespace sc{
 
 			bool operator!=( const vector& rhs )
 			{
-				if( this.size() == rhs.size() )
+				if( this->m_size == rhs.size() )
 				{
-					for(int i=0; i<(int)this.size(); i++)
+					for(int i=0; i<(int)this->m_size; i++)
 					{
-						if(this[i] != rhs[i]) return true;
+						if(this->arr[i] != rhs.arr[i]) return true;
 					}
 					return false;
 				}
@@ -316,7 +316,7 @@ namespace sc{
 		}; // class my_constiterator
 
 	}; // class vector
-	
+
 
 } // namespace sc
 
