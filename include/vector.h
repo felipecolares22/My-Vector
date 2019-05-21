@@ -104,14 +104,14 @@ namespace sc{
 			{
 				vector<T> aux = *this;
 				delete arr;
-				
-				this->m_capacity = m_size
+
+				this->m_size--;
 				this->arr = new T[m_capacity];
-				for( size_type i{0u}; i < (m_size-1); i++ )
+
+				for( size_type i{0u}; i < m_size; i++ )
 				{
-					arr[i] = aux[i]
+					arr[i] = aux[i];
 				}
-		
 			}
 
 			const T & back( ) const;
