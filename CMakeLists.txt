@@ -3,6 +3,10 @@ project (vector VERSION 1.0.0 LANGUAGES CXX )
 
 #=== FINDING PACKAGES ===#
 
+# Locate GTest package (library)
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
 #--------------------------------
 # This is for old cmake versions
 set (CMAKE_CXX_STANDARD 14)

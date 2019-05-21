@@ -1,158 +1,604 @@
-#include <iostream>
-#include <array>
-#include <iterator>
+#include <iterator>             // std::begin(), std::end()
+#include <functional>           // std::function
+#include <algorithm>            // std::min_element
 
-#include "vector.h"
-
-using namespace sc;
-
-int main(){
-	std::cout << ">>> STARTING SC::VECTOR TESTS\n\n";
-	/*******************************************
-								  STARTING TESTS								
-	*******************************************/
-	// Default constructor
-	std::cout << ">>> Default constructor:\n";
-	vector<int> vct1;
-	std::cout << "Size:     " << vct1.size() << std::endl;
-	std::cout << "capacity: " << vct1.capacity() << std::endl;
-
-	std::cout << std::endl;
-
-	// Size defined constructor
-	std::cout << ">>> Size defined constructor:\n";
-	vector<int> vct2(5);
-	std::cout << "Size:     " << vct2.size() << std::endl;
-	std::cout << "capacity: " << vct2.capacity() << std::endl;
-
-	std::cout << std::endl;
-
-	// First last constructor
-	std::cout << ">>> First last constructor:\n";
-	std::array< int, 4 > arr1 = {1, 2, 3, 4};
-	vector<int> vct3( arr1.begin(), arr1.end() );
-	std::cout << "Size:     " << vct3.size() << std::endl;
-	std::cout << "capacity: " << vct3.capacity() << std::endl;
-	std::cout << vct3[0] << " " << vct3[1] << " " << vct3[2] << " " << vct3[3] << std::endl;
-
-	std::cout << std::endl;
-
-	// Copy constructor
-	std::cout << ">>> Copy constructor:\n";
-	vector<int> vct4(vct3);
-	std::cout << "Size:     " << vct4.size() << std::endl;
-	std::cout << "capacity: " << vct4.capacity() << std::endl;
-	std::cout << vct4[0] << " " << vct4[1] << " " << vct4[2] << " " << vct4[3] << std::endl;
-
-	std::cout << std::endl;
-
-	// initializer_list constructor
-	std::cout << ">>> Initializer_list constructor:\n";
-	vector<int> vct5 {2, 4, 6};
-	std::cout << "Size:     " << vct5.size() << std::endl;
-	std::cout << "capacity: " << vct5.capacity() << std::endl;
-	std::cout << vct5[0] << " " << vct5[1] << " " << vct5[2] << std::endl;
-
-	std::cout << std::endl;
-
-	// operator= 
-	std::cout << ">>> operator= (vector):\n";
-	vector<int> vct6 = {1};
-	vector<int> vct7 = {3, 3, 3, 3, 3};
-	vct6 = vct7 = vct5;
-	std::cout << "> Using vct6 = vct7 = vct5\n";
-	std::cout << "VCT6\n";
-	std::cout << "Size:     " << vct6.size() << std::endl;
-	std::cout << "capacity: " << vct6.capacity() << std::endl;
-	std::cout << vct6[0] << " " << vct6[1] << " " << vct6[2] << std::endl;
-	std::cout << "VCT7\n";
-	std::cout << "Size:     " << vct7.size() << std::endl;
-	std::cout << "capacity: " << vct7.capacity() << std::endl;
-	std::cout << vct7[0] << " " << vct7[1] << " " << vct7[2] << std::endl;
-
-	std::cout << std::endl;
-
-	//operator=
-	std::cout << ">>> operator= (initializer_list):\n";
-	vector<int> vct8 = {1};
-	vector<int> vct9 = {3, 3, 3, 3, 3};
-	vct8 = vct9 = {10, 20, 30};
-	std::cout << "> Using vct8 = vct9 = {10, 20, 30}\n";
-	std::cout << "VCT8\n";
-	std::cout << "Size:     " << vct8.size() << std::endl;
-	std::cout << "capacity: " << vct8.capacity() << std::endl;
-	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
-	std::cout << "VCT9\n";
-	std::cout << "Size:     " << vct9.size() << std::endl;
-	std::cout << "capacity: " << vct9.capacity() << std::endl;
-	std::cout << vct9[0] << " " << vct9[1] << " " << vct9[2] << std::endl;
-
-	std::cout << std::endl;
-
-	// clear and empty
-	std::cout << ">>> Clear and empty methods:\n";
-	std::cout << "Checking if VCT9 is empty: " << vct9.empty() << std::endl;
-	std::cout << "Cleaning VCT9:\n";
-	vct9.clear();
-	std::cout << "Checking if VCT9 is empty: " << vct9.empty() << std::endl;
-	std::cout << "Size:     " << vct9.size() << std::endl;
-	std::cout << "capacity: " << vct9.capacity() << std::endl;
-
-	std::cout << std::endl;
-
-	// at() method
-	std::cout << ">>> At() method:\n";
-	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
-	std::cout << "vct8.at(1): " << vct8.at(1) << std::endl;
-	try
-	{
-		std::cout << "vct8.at(10): " << vct8.at(10) << std::endl;
-	} catch(const std::out_of_range& e) {
-		std::cout << "Entrou no catch\n"; 
-	}
-
-	std::cout << std::endl;
-
-	// reserve() method
-	std::cout << ">>> reserve() method:\n";
-	std::cout << "Size:     " << vct8.size() << std::endl;
-	std::cout << "capacity: " << vct8.capacity() << std::endl;
-	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
-	std::cout << "using reserve(10)...\n";
-	vct8.reserve(10);
-	std::cout << "Size:     " << vct8.size() << std::endl;
-	std::cout << "capacity: " << vct8.capacity() << std::endl;
-	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
-
-	std::cout << std::endl;
-
-	//shrink_to_fit() method
-	std::cout << ">>> shrink_to_fit() method:\n";
-	std::cout << "Size:     " << vct8.size() << std::endl;
-	std::cout << "capacity: " << vct8.capacity() << std::endl;
-	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
-	std::cout << "using shrink_to_fit...\n";
-	vct8.shrink_to_fit();
-	std::cout << "Size:     " << vct8.size() << std::endl;
-	std::cout << "capacity: " << vct8.capacity() << std::endl;
-	std::cout << vct8[0] << " " << vct8[1] << " " << vct8[2] << std::endl;
-
-	// operator == and !=
-	std::cout << ">>> == and != operators:\n";
-	vector<int> v1 = {1, 2, 3};
-	vector<int> v2 = v1;
-	std::cout << ">Using v1 = v2:\ntesting v1 == v2: " << (v1 == v2) << std::endl;
-	std::cout << "testing v1 != v2: " << (v1 != v2) << std::endl;
-	std::cout << ">Using v2.clear()...\n";
-	v2.clear();
-	std::cout << "testing v1 == v2: " << (v1 == v2) << std::endl;
-	std::cout << "testing v1 != v2: " << (v1 != v2) << std::endl;
+#include "gtest/gtest.h"        // gtest lib
+#include "../include/vector.h"   // header file for tested functions
 
 
-	/*******************************************
-								    ENDING TESTS								
-	*******************************************/
-	std::cout << "\n>>> Ending tests\n";
+// ============================================================================
+// TESTING VECTOR AS A CONTAINER OF INTEGERS
+// ============================================================================s
 
-	return EXIT_SUCCESS;
+TEST(IntVector, DefaultConstructor)
+{
+    sc::vector<int> vec;
+
+    EXPECT_EQ( vec.size(), 0 );
+    EXPECT_EQ( vec.capacity(), 0 );
+    EXPECT_TRUE( vec.empty() );
+}
+
+
+TEST(IntVector, ConstructorSize)
+{
+    sc::vector<int> vec(10);
+
+    EXPECT_EQ( vec.size(), 0 );
+    EXPECT_EQ( vec.capacity(), 10 );
+    EXPECT_TRUE( vec.empty() );
+}
+
+
+TEST(IntVector, ListConstructor)
+{
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    ASSERT_EQ( vec.size(), 5 );
+    EXPECT_FALSE( vec.empty() );
+
+    for( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( i+1, vec[i] );
+}
+
+TEST(IntVector, RangeConstructor)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2( vec.begin(), vec.end() );
+    ASSERT_EQ( vec2.size(), 5 );
+    EXPECT_FALSE( vec.empty() );
+
+    for( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( i+1, vec[i] );
+
+    // Range is part of the vector.
+    sc::vector<int> vec3( std::next( vec.begin(), 1 ), std::next( vec.begin(), 3 ) );
+    ASSERT_EQ( vec3.size(), 2 );
+    EXPECT_FALSE( vec3.empty() );
+
+    for( auto i{0u} ; i < vec3.size() ; ++i )
+        ASSERT_EQ( vec[i+1], vec3[i] );
+}
+
+TEST(IntVector, CopyConstructor)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2( vec );
+    ASSERT_EQ( vec2.size(), 5 );
+    EXPECT_FALSE( vec2.empty() );
+
+    // CHeck whether the copy worked.
+    for( auto i{0u} ; i < vec2.size() ; ++i )
+        ASSERT_EQ( i+1, vec2[i] );
+
+    // Change the original vector and check
+    // whether that also changes the second vec.
+    vec[2] = 10;
+    for( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( i+1, vec2[i] );
+}
+
+TEST(IntVector, MoveConstructor)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2( std::move( vec ) );
+    ASSERT_EQ( vec2.size(), 5 );
+    EXPECT_FALSE( vec2.empty() );
+
+    // CHeck whether the copy worked.
+    for( auto i{0u} ; i < vec2.size() ; ++i )
+        ASSERT_EQ( i+1, vec2[i] );
+}
+
+TEST(IntVector, AssignOperator)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2;
+
+    vec2 = vec;
+    ASSERT_EQ( vec2.size(), 5 );
+    EXPECT_FALSE( vec2.empty() );
+
+    // CHeck whether the copy worked.
+    for( auto i{0u} ; i < vec2.size() ; ++i )
+        ASSERT_EQ( i+1, vec2[i] );
+}
+
+TEST(IntVector, MoveAssignOperator)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2;
+
+    vec2 = std::move( vec );
+    ASSERT_EQ( vec2.size(), 5 );
+    ASSERT_FALSE( vec2.empty() );
+    EXPECT_EQ( vec.size(), 0 );
+    EXPECT_EQ( vec.capacity(), 0 );
+    EXPECT_TRUE( vec.empty() );
+
+    // CHeck whether the copy worked.
+    for( auto i{0u} ; i < vec2.size() ; ++i )
+        ASSERT_EQ( i+1, vec2[i] );
+}
+
+TEST(IntVector, ListInitializerAssign)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec = { 1, 2, 3, 4, 5 };
+
+    EXPECT_EQ( vec.size(), 5 );
+    EXPECT_EQ( vec.capacity(), 5 );
+    EXPECT_FALSE( vec.empty() );
+
+    // CHeck whether the copy worked.
+    for( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( i+1, vec[i] );
+}
+
+TEST(IntVector, Clear)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec = { 1, 2, 3, 4, 5 };
+
+    EXPECT_EQ( vec.size(), 5 );
+    EXPECT_EQ( vec.capacity(), 5 );
+    EXPECT_FALSE( vec.empty() );
+
+    vec.clear();
+
+    EXPECT_EQ( vec.size(), 0 );
+    EXPECT_EQ( vec.capacity(), 5 );
+    EXPECT_TRUE( vec.empty() );
+}
+
+// TEST(IntVector, PushFront)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec;
+
+//     ASSERT_TRUE( vec.empty() );
+//     for ( auto i{0} ; i < 5 ; ++i )
+//     {
+//         vec.push_front( i+1 );
+//         ASSERT_EQ( vec.size(),  i+1 );
+//     }
+//     ASSERT_FALSE( vec.empty() );
+
+//     for( auto i{4u} ; i >= vec.size() ; --i )
+//         ASSERT_EQ( i+1, vec[i] );
+
+//     // REmove all elements.
+//     vec.clear();
+//     ASSERT_TRUE( vec.empty()  );
+//     for ( auto i{0} ; i < 5 ; ++i )
+//     {
+//         vec.push_front( i+1 );
+//         ASSERT_EQ( vec.size(),  i+1 );
+//     }
+//     ASSERT_FALSE( vec.empty() );
+
+//     for( auto i{4u} ; i >= vec.size() ; --i )
+//         ASSERT_EQ( i+1, vec[i] );
+// }
+
+// TEST(IntVector, PushBack)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec;
+
+//     ASSERT_TRUE( vec.empty() );
+//     for ( auto i{0} ; i < 5 ; ++i )
+//     {
+//         vec.push_back( i+1 );
+//         ASSERT_EQ( vec.size(),  i+1 );
+//     }
+//     ASSERT_FALSE( vec.empty() );
+
+//     for( auto i{4u} ; i >= vec.size() ; --i )
+//         ASSERT_EQ( i+1, vec[i] );
+
+//     // REmove all elements.
+//     vec.clear();
+//     ASSERT_TRUE( vec.empty()  );
+//     for ( auto i{0} ; i < 5 ; ++i )
+//     {
+//         vec.push_back( i+1 );
+//         ASSERT_EQ( vec.size(),  i+1 );
+//     }
+//     ASSERT_FALSE( vec.empty() );
+
+//     for( auto i{4u} ; i >= vec.size() ; --i )
+//         ASSERT_EQ( i+1, vec[i] );
+// }
+
+// TEST(IntVector, PopBack)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+
+//     while( not vec.empty() )
+//     {
+//         vec.pop_back();
+//         // Checke whether we have the same list except for the last.
+//         for( auto i{0u} ; i < vec.size() ; ++i )
+//             ASSERT_EQ( i+1, vec[i] );
+//     }
+// }
+
+// TEST(IntVector, PopFront)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+
+//     auto start{2};
+//     while( not vec.empty() )
+//     {
+//         vec.pop_front();
+//         // Checke whether we have the same list except for the last.
+//         for( auto i{0u} ; i < vec.size() ; ++i )
+//             ASSERT_EQ( start+i, vec[i] );
+
+//         start++;
+//     }
+// }
+
+// TEST(IntVector, Front)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+
+//     auto i{0};
+//     while( not vec.empty() )
+//     {
+//         auto current_size = vec.size();
+//         ASSERT_EQ( vec.front(), ++i );
+//         vec.front() = 100;
+//         ASSERT_EQ( current_size, vec.size() );
+//         ASSERT_EQ( vec[0], 100 );
+
+//         vec.pop_front();
+//     }
+// }
+// TEST(IntVector, FrontConst)
+// {
+//     // #1 From an empty vector.
+//     const sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+//     ASSERT_EQ( vec.front(), 1 );
+
+//     const sc::vector<char> vec2{ 'a', 'e', 'i', 'o', 'u' };
+//     ASSERT_EQ( vec2.front(), 'a' );
+// }
+
+// TEST(IntVector, Back)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+
+//     auto i{5};
+//     while( not vec.empty() )
+//     {
+//         auto current_size = vec.size();
+//         ASSERT_EQ( vec.back(), i-- );
+//         vec.back() = 100;
+//         ASSERT_EQ( current_size, vec.size() );
+//         ASSERT_EQ( vec[vec.size()-1], 100 );
+//         vec.pop_back();
+//     }
+// }
+
+// TEST(IntVector, BackConst)
+// {
+//     // #1 From an empty vector.
+//     const sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+//     ASSERT_EQ( vec.back(), 5 );
+
+//     const sc::vector<char> vec2{ 'a', 'e', 'i', 'o', 'u' };
+//     ASSERT_EQ( vec2.back(), 'u' );
+// }
+
+// TEST(IntVector, AssignCountValue)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<long> vec{ 1, 2, 3, 4, 5 };
+
+//     ASSERT_EQ( vec.size(), 5 );
+//     auto original_cap = vec.capacity();
+
+//     // Test assign with a count smaller than the original vec size.
+//     long value{-4};
+//     vec.assign( 3, value );
+//     ASSERT_EQ( vec.size(), 3 );
+//     // Capacity should be the same.
+//     EXPECT_EQ( vec.capacity(), original_cap );
+//     // Verify the elements.
+//     for ( auto i{0u} ; i < vec.size() ; ++i )
+//         ASSERT_EQ( value, vec[i] );
+
+//     // Test assign with a count GREATER than the original vec size.
+//     long new_value{42};
+//     vec.assign( 10, new_value );
+//     ASSERT_EQ( vec.size(), 10 );
+//     EXPECT_GE( vec.capacity(), original_cap );
+//     // Verify the elements.
+//     for ( auto i{0u} ; i < vec.size() ; ++i )
+//         ASSERT_EQ( new_value, vec[i] );
+// }
+
+
+
+// TEST(IntVector, OperatorBracketsRHS)
+// {
+//     const sc::vector<int> vec { 1, 2, 3, 4, 5 };
+//     const sc::vector<int> vec2 { 1, 2, 3, 4, 5 };
+
+//     for ( auto i{0u} ; i < vec.size() ; ++i )
+//         ASSERT_EQ( vec[i], vec2[i]);
+// }
+
+// TEST(IntVector, OperatorBracketsLHS)
+// {
+//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+//     sc::vector<int> vec2 { 10, 20, 30, 40, 50 };
+
+//     for ( auto i{0u} ; i < vec.size() ; ++i )
+//         vec[i] = vec2[i];
+//     for ( auto i{0u} ; i < vec.size() ; ++i )
+//         ASSERT_EQ( vec[i], vec2[i]);
+// }
+
+// TEST(IntVector, AtRHS)
+// {
+//     const sc::vector<int> vec { 1, 2, 3, 4, 5 };
+//     const sc::vector<int> vec2 { 1, 2, 3, 4, 5 };
+
+//     for ( auto i{0u} ; i < vec.size() ; ++i )
+//         ASSERT_EQ( vec.at(i), vec2.at(i));
+
+//     bool worked{false};
+//     try { vec.at( 40 ); }
+//     catch( std::out_of_range & e )
+//     { worked = true; }
+
+//     ASSERT_TRUE( worked );
+// }
+
+// TEST(IntVector, AtLHS)
+// {
+//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+//     sc::vector<int> vec2 { 10, 20, 30, 40, 50 };
+
+//     for ( auto i{0u} ; i < vec.size() ; ++i )
+//         vec.at(i) = vec2.at(i);
+//     for ( auto i{0u} ; i < vec.size() ; ++i )
+//         ASSERT_EQ( vec.at(i), vec2.at(i) );
+
+//     bool worked{false};
+//     try { vec.at( vec.size() ) = 100; }
+//     catch( std::out_of_range & e )
+//     { worked = true; }
+
+//     ASSERT_TRUE( worked );
+// }
+
+// TEST(IntVector, Capacity)
+// {
+//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+
+//     ASSERT_EQ( vec.capacity(), 5u );
+//     vec.reserve(10);
+//     ASSERT_EQ( vec.capacity(), 10u );
+//     vec.reserve(3); // Nothing happens here.
+//     ASSERT_EQ( vec.capacity(), 10u );
+
+//     auto i{0};
+//     for( const auto & e : vec )
+//         ASSERT_EQ( e, ++i );
+// }
+
+// TEST(IntVector, ShrinkToFit)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+
+//     ASSERT_EQ( vec.capacity(), 5u );
+//     vec.pop_back();
+//     vec.pop_back();
+//     ASSERT_EQ( vec.capacity(), 5u );
+//     vec.shrink_to_fit();
+//     ASSERT_EQ( vec.capacity(), 3 );
+//     auto i{0};
+//     for( const auto & e : vec )
+//         ASSERT_EQ( e , ++i );
+// }
+
+// TEST(IntVector, OperatorEqual)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+//     sc::vector<int> vec2 { 1, 2, 3, 4, 5 };
+//     sc::vector<int> vec3 { 1, 2, 8, 4, 5 };
+//     sc::vector<int> vec4 { 8, 4, 5 };
+
+//     ASSERT_EQ( vec , vec2 );
+//     ASSERT_TRUE( not ( vec == vec3 ) );
+//     ASSERT_TRUE( not ( vec == vec4 ) );
+// }
+
+// TEST(IntVector, OperatorDifferent)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+//     sc::vector<int> vec2 { 1, 2, 3, 4, 5 };
+//     sc::vector<int> vec3 { 1, 2, 8, 4, 5 };
+//     sc::vector<int> vec4 { 8, 4, 5 };
+
+//     ASSERT_TRUE( not( vec != vec2 ) );
+//     ASSERT_NE( vec, vec3 );
+//     ASSERT_NE( vec,vec4 );
+// }
+
+// TEST(IntVector, InsertSingleValueAtPosition)
+// {
+//     // #1 From an empty vector.
+//     sc::vector<int> vec { 1, 2, 4, 5, 6 };
+
+//     // Insert at front
+//     vec.insert( vec.begin(), 0 );
+//     ASSERT_EQ( vec , ( sc::vector<int>{ 0, 1, 2, 4, 5, 6 } ) );
+//     // Insert in the middle
+//     vec.insert( vec.begin()+3, 3 );
+//     ASSERT_EQ( vec , ( sc::vector<int>{ 0, 1, 2, 3, 4, 5, 6 } ) );
+//     // Insert at the end
+//     vec.insert( vec.end(), 7 );
+//     ASSERT_EQ( vec , ( sc::vector<int>{ 0, 1, 2, 3, 4, 5, 6, 7 } ) );
+// }
+
+// TEST(IntVector, InsertRange)
+// {
+//     // Aux arrays.
+//     sc::vector<int> vec1 { 1, 2, 3, 4, 5 };
+//     sc::vector<int> vec2 { 1, 2, 3, 4, 5 };
+//     sc::vector<int> source { 6, 7, 8, 9, 10 };
+
+//     // Inset at the begining.
+//     vec1.insert( vec1.begin(), source.begin(), source.end() );
+//     ASSERT_EQ( vec1 , ( sc::vector<int>{ 6, 7, 8, 9, 10, 1, 2, 3, 4, 5 } ) );
+
+//     // In the middle
+//     vec1 = vec2;
+//     vec1.insert( std::next( vec1.begin(), 2 ), source.begin(), source.end() );
+//     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
+
+//     // At the end
+//     vec1 = vec2;
+//     vec1.insert( vec1.end(), source.begin(), source.end() );
+//     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } ) );
+
+//     // Outside
+//     vec1 = vec2;
+//     vec1.insert( std::next( vec1.end(), 2 ) , source.begin(), source.end() );
+//     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 3, 4, 5 } ) );
+
+// }
+
+// TEST(IntVector, InsertInitializarList)
+// {
+//     // Aux arrays.
+//     sc::vector<int> vec1 { 1, 2, 3, 4, 5 };
+//     sc::vector<int> vec2 { 1, 2, 3, 4, 5 };
+//     sc::vector<int> source { 6, 7, 8, 9, 10 };
+
+//     // Inset at the begining.
+//     vec1.insert( vec1.begin(), { 6, 7, 8, 9, 10 } );
+//     ASSERT_EQ( vec1 , ( sc::vector<int>{ 6, 7, 8, 9, 10, 1, 2, 3, 4, 5 } ) );
+
+//     // In the middle
+//     vec1 = vec2;
+//     vec1.insert( std::next( vec1.begin(), 2 ), { 6, 7, 8, 9, 10 } );
+//     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
+
+//     // At the end
+//     vec1 = vec2;
+//     vec1.insert( vec1.end(), { 6, 7, 8, 9, 10 } );
+//     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } ) );
+
+//     // Outside
+//     vec1 = vec2;
+//     vec1.insert( std::next( vec1.end(), 2 ) , { 6, 7, 8, 9, 10 } );
+//     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 3, 4, 5 } ) );
+// }
+
+// TEST(IntVector, AssignCountValue2)
+// {
+//         // Initial vector.
+//         sc::vector<char> vec { 'a', 'b', 'c', 'd', 'e' };
+
+//         // assigning count values to sc::vector, with count < size().
+//         vec.assign( 3, 'x' );
+//         ASSERT_EQ( vec , ( sc::vector<char>{ 'x', 'x', 'x' } ) );
+//         ASSERT_EQ( vec.size() , 3 );
+//         ASSERT_EQ( vec.capacity() , 5 );
+
+//         // assigning count values to sc::vector, with count , size().
+//         vec = { 'a', 'b', 'c', 'd', 'e' };
+//         vec.assign( 5, 'y' );
+//         ASSERT_EQ( vec , ( sc::vector<char>{ 'y','y','y','y','y' } ) );
+//         ASSERT_EQ( vec.size() , 5 );
+//         ASSERT_EQ( vec.capacity() , 5 );
+
+//         // assigning count values to sc::vector, with count > size().
+//         vec = { 'a', 'b', 'c', 'd', 'e' };
+//         vec.assign( 8, 'z' );
+//         ASSERT_EQ( vec , ( sc::vector<char>{ 'z','z','z','z','z','z','z','z' } ) );
+//         ASSERT_EQ( vec.size() , 8 );
+//         ASSERT_EQ( vec.capacity() , 8 );
+// }
+
+// TEST(IntVector, EraseRange)
+// {
+//     // Initial vector.
+//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+
+//     // removing a segment from the beginning.
+//     auto past_last = vec.erase( vec.begin(), std::next(vec.begin(),3) );
+//     ASSERT_EQ( vec.begin() , past_last );
+//     ASSERT_EQ( vec , ( sc::vector<int>{ 4, 5 } ) );
+//     ASSERT_EQ( vec.size() , 2 );
+
+//     // removing at the middle.
+//     vec = { 1, 2, 3, 4, 5 };
+//     past_last = vec.erase( std::next(vec.begin(),1), std::next(vec.begin(),4) );
+//     ASSERT_EQ( std::next(vec.begin(),1) , past_last );
+//     ASSERT_EQ( vec , ( sc::vector<int>{ 1, 5 } ) );
+//     ASSERT_EQ( vec.size() , 2 );
+
+//     // removing a segment that reached the end.
+//     vec = { 1, 2, 3, 4, 5 };
+//     past_last = vec.erase( std::next(vec.begin(),2), vec.end() );
+//     ASSERT_EQ( vec.end() , past_last );
+//     ASSERT_EQ( vec , ( sc::vector<int>{ 1, 2 } ) );
+//     ASSERT_EQ( vec.size() , 2 );
+
+//     // removing the entire vector.
+//     vec = { 1, 2, 3, 4, 5 };
+//     past_last = vec.erase( vec.begin(), vec.end() );
+//     ASSERT_EQ( vec.end() , past_last );
+//     ASSERT_TRUE( vec.empty() );
+// }
+
+// TEST(IntVector, ErasePos)
+// {
+//     // Initial vector.
+//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+
+//     // removing a single element.
+//     vec = { 1, 2, 3, 4, 5 };
+//     auto past_last = vec.erase( vec.begin() );
+//     ASSERT_EQ( vec , ( sc::vector<int>{ 2, 3, 4, 5 } ) );
+//     ASSERT_EQ( vec.begin() , past_last );
+//     ASSERT_EQ( vec.size() , 4 );
+
+//     // removing a single element in the middle.
+//     vec = { 1, 2, 3, 4, 5 };
+//     past_last = vec.erase( std::next(vec.begin(),2) );
+//     ASSERT_EQ( vec , ( sc::vector<int>{ 1, 2, 4, 5 } ) );
+//     ASSERT_EQ( std::next(vec.begin(),2) , past_last );
+//     ASSERT_EQ( vec.size() , 4 );
+
+//     // removing a single element at the end.
+//     vec = { 1, 2, 3, 4, 5 };
+//     past_last = vec.erase( std::next(vec.begin(),vec.size()-1 ) );
+//     ASSERT_EQ( vec , ( sc::vector<int>{ 1, 2, 3, 4 } ) );
+//     ASSERT_EQ( vec.end() , past_last );
+//     ASSERT_EQ( vec.size() , 4 );
+// }
+
+int main(int argc, char** argv)
+{
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

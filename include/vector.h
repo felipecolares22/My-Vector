@@ -188,6 +188,7 @@ namespace sc{
 				return *this;
 			}
 
+			/// Operator== overload for vectors comparison
 			bool operator==( const vector& rhs )
 			{
 				if( this->m_size == rhs.size() )
@@ -201,6 +202,7 @@ namespace sc{
 				else return false;
 			}
 
+			/// Operator!= overload for vectors comparison
 			bool operator!=( const vector& rhs )
 			{
 				if( this->m_size == rhs.size() )
