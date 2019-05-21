@@ -8,9 +8,6 @@
     \brief namespace to differ from std
 */
 namespace sc{
-
-	template< typename iT >
-	class my_iterator;
 	
 	/*! \class Vector
     	\brief means like std::vector
@@ -27,6 +24,9 @@ namespace sc{
 			static constexpr size_type initial_size=0; //!< Default value is 0.
 
 		public:
+			template< typename iT >
+			class my_iterator;
+
 			//=== Constructors
 			/// Default constructor
 			vector( )
@@ -74,11 +74,13 @@ namespace sc{
 			//=== Iterators
 			my_iterator< T > begin()
 			{
-				return arr;
+				my_iterator<T> iter(&arr[0]);
+				return iter;
 			}
 			my_iterator< T > end()
 			{
-				return &arr[m_size];
+				my_iterator<T> iter(&arr[m_size]);
+				return iter;
 			}
 			my_iterator < const T > cbegin() const;
 			my_iterator < const T > cend() const;
@@ -266,22 +268,24 @@ namespace sc{
 				typedef size_t size_type; //!< Type of size.
 				
 				//=== Constructor
-				my_iterator();
+				my_iterator(iT* it)
+					:it{it}
+				{/*empty*/}
 
 				//=== Destructor
 				~my_iterator();
 
 				//=== Operations
-				my_iterator< iT > insert ( my_iterator< iT > pos, const iT & value );
+				iterator insert ( iterator pos, const iT & value );
 
 				template< typename InItr >
-				my_iterator< iT > insert( my_iterator< iT > pos, InItr first, InItr last );
+				iterator insert( iterator pos, InItr first, InItr last );
 
-				my_iterator< iT > insert( my_iterator < const iT > pos, std::initializer_list< iT > ilist );
+				iterator insert( my_iterator < const iT > pos, std::initializer_list< iT > ilist );
 
-				my_iterator< iT > erase( my_iterator< iT > pos );
+				iterator erase( iterator pos );
 
-				my_iterator< iT > erase( my_iterator< iT > first, my_iterator< iT > last );
+				iterator erase( iterator first, iterator last );
 
 				void assign( size_type count, const iT& value );
 
@@ -289,19 +293,25 @@ namespace sc{
 				void assign( InItr first, InItr last );
 
 				void assign( std::initializer_list< iT > ilist );
-
+/*
 			public:
 				//=== Operators
-				my_iterator< iT > operator++();
-				my_iterator< iT > operator*();
-				my_iterator< iT > operator-();
-				friend my_iterator< iT >& operator+(int n, my_iterator< iT > it);
-				friend my_iterator< iT > operator+(my_iterator< iT > it, int n);
-				friend my_iterator< iT >& operator-(int n, my_iterator< iT > it);
-				friend my_iterator< iT > operator-(my_iterator< iT > it, int n);
-				pointer operator->();
-				bool operator==();
-				bool operator!=();
+				iterator operator++();
+				iterator operator*();
+				iterator operator-();
+				friend iterator& operator+(int n, iterator it);
+				friend iterator operator+(iterator it, int n);
+				friend iterator& operator-(int n, iterator it);
+				friend iterator operator-(iterator it, int n);
+				operator->();
+				bool operator==(iterator& it2)
+				{
+					
+				}
+				bool operator!=(iterator& it2)
+				{
+				
+				}*/
 		}; // class my_iterator
 		
 
@@ -314,7 +324,7 @@ namespace sc{
 		class my_constiterator{
 			private:
 				CiT * it; //!< Constant iterator pointer
-				typedef my_constiterator const_iterator;
+				typedef my_constiterator< CiT > const_iterator;
 
 			public:
 				//=== Alias
@@ -327,16 +337,16 @@ namespace sc{
 				~my_constiterator();
 
 				//=== Const Operations
-				const my_constiterator< CiT > insert( my_iterator< CiT > pos, const CiT & value );
+				const const_iterator insert( const_iterator pos, const CiT & value );
 
 				template< typename InItr >
-				const my_constiterator< CiT > insert( my_iterator< CiT > pos, InItr first, InItr last );
+				const const_iterator insert( const_iterator pos, InItr first, InItr last );
 
-				const my_constiterator< CiT > insert( my_iterator < const CiT > pos, std::initializer_list< CiT > ilist );
+				const const_iterator insert( my_constiterator < const CiT > pos, std::initializer_list< CiT > ilist );
 
-				const my_constiterator< CiT > erase( my_iterator< CiT > pos );
+				const const_iterator erase( const_iterator pos );
 
-				const my_constiterator< CiT > erase( my_iterator< CiT > first, my_iterator< CiT > last );
+				const const_iterator erase( const_iterator first, const_iterator last );
 
 				void assign( size_type count, const CiT& value );
 
