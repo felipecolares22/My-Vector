@@ -2,11 +2,11 @@
 In this project our objective is to build our version or the std::vector, the sc::vector.
 
 ### Dependencies
-*`cmake`
-*`make`
-*`g++`
-*`google tests`
-*`Doxygen (to gerenate code documentation)`
+	* `cmake`
+	* `make`
+	* `g++`
+	* `google tests`
+	* `Doxygen (to gerenate code documentation)`
 
 ### Usage
 To use the library, you will need to import the `vector.h` file located on the `include` folder to your project.Look the documentation for a more detailed explanation of each sc::vector method.
