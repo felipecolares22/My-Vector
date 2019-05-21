@@ -1,5 +1,5 @@
 # My Vector
-	In this project our objective is to build our version or the std::vector, the sc::vector.
+In this project our objective is to build our version or the std::vector, the sc::vector.
 
 ### Dependencies
 *`cmake`
@@ -36,5 +36,5 @@ make
 Type `./vector_tests` and see the results.
 
 ## Authorship
-Program developed by [Matheus de Andrade] (https://github.com/matheusmas132) and [Felipe Colares] (https://github.com/felipecolares22), 2019.1
+Program developed by [Matheus de Andrade](https://github.com/matheusmas132) and [Felipe Colares](https://github.com/felipecolares22), 2019.1
 
