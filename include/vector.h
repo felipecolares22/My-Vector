@@ -9,7 +9,7 @@
 */
 namespace sc{
 
-	template< typename T >
+	template< typename iT >
 	class my_iterator;
 	
 	/*! \class Vector
@@ -292,16 +292,16 @@ namespace sc{
 
 			public:
 				//=== Operators
-				// my_iterator< iT > operator++();
-				// my_iterator< iT > operator*();
-				// my_iterator< iT > operator-();
-				// friend my_iterator< iT >& operator+(int n, my_iterator< iT > it);
-				// friend my_iterator< iT > operator+(my_iterator< iT > it, int n);
-				// friend my_iterator< iT >& operator-(int n, my_iterator< iT > it);
-				// friend my_iterator< iT > operator-(my_iterator< iT > it, int n);
-				// pointer operator->();
-				// bool operator==();
-				// bool operator!=();
+				my_iterator< iT > operator++();
+				my_iterator< iT > operator*();
+				my_iterator< iT > operator-();
+				friend my_iterator< iT >& operator+(int n, my_iterator< iT > it);
+				friend my_iterator< iT > operator+(my_iterator< iT > it, int n);
+				friend my_iterator< iT >& operator-(int n, my_iterator< iT > it);
+				friend my_iterator< iT > operator-(my_iterator< iT > it, int n);
+				pointer operator->();
+				bool operator==();
+				bool operator!=();
 		}; // class my_iterator
 		
 
@@ -313,7 +313,7 @@ namespace sc{
 		template< typename CiT >
 		class my_constiterator{
 			private:
-				Cit * it; //!< Constant iterator pointer
+				CiT * it; //!< Constant iterator pointer
 				typedef my_constiterator const_iterator;
 
 			public:
