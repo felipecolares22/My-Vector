@@ -1,6 +1,7 @@
 #include <iterator>             // std::begin(), std::end()
 #include <functional>           // std::function
 #include <algorithm>            // std::min_element
+#include <vector>
 
 #include "gtest/gtest.h"        // gtest lib
 #include "vector.h"   			// header file for tested functions
@@ -40,25 +41,25 @@ TEST(IntVector, ListConstructor)
         ASSERT_EQ( i+1, vec[i] );
 }
 
-// TEST(IntVector, RangeConstructor)
-// {
-//     // Range = the entire vector.
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-//     sc::vector<int> vec2( vec.begin(), vec.end() );
-//     ASSERT_EQ( vec2.size(), 5 );
-//     EXPECT_FALSE( vec.empty() );
+TEST(IntVector, RangeConstructor)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2( vec.begin(), vec.end() );
+    ASSERT_EQ( vec2.size(), 5 );
+    EXPECT_FALSE( vec.empty() );
 
-//     for( auto i{0u} ; i < vec.size() ; ++i )
-//         ASSERT_EQ( i+1, vec[i] );
+    for( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( i+1, vec[i] );
 
-//     // Range is part of the vector.
-//     sc::vector<int> vec3( std::next( vec.begin(), 1 ), std::next( vec.begin(), 3 ) );
-//     ASSERT_EQ( vec3.size(), 2 );
-//     EXPECT_FALSE( vec3.empty() );
+    // Range is part of the vector.
+    sc::vector<int> vec3( vec.begin()+1, vec.begin()+3  );
+    ASSERT_EQ( vec3.size(), 2 );
+    EXPECT_FALSE( vec3.empty() );
 
-//     for( auto i{0u} ; i < vec3.size() ; ++i )
-//         ASSERT_EQ( vec[i+1], vec3[i] );
-// }
+    for( auto i{0u} ; i < vec3.size() ; ++i )
+        ASSERT_EQ( vec[i+1], vec3[i] );
+}
 
 TEST(IntVector, CopyConstructor)
 {
@@ -79,19 +80,6 @@ TEST(IntVector, CopyConstructor)
         ASSERT_EQ( i+1, vec2[i] );
 }
 
-TEST(IntVector, MoveConstructor)
-{
-    // Range = the entire vector.
-    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-    sc::vector<int> vec2( std::move( vec ) );
-    ASSERT_EQ( vec2.size(), 5 );
-    EXPECT_FALSE( vec2.empty() );
-
-    // CHeck whether the copy worked.
-    for( auto i{0u} ; i < vec2.size() ; ++i )
-        ASSERT_EQ( i+1, vec2[i] );
-}
-
 TEST(IntVector, AssignOperator)
 {
     // Range = the entire vector.
@@ -106,24 +94,6 @@ TEST(IntVector, AssignOperator)
     for( auto i{0u} ; i < vec2.size() ; ++i )
         ASSERT_EQ( i+1, vec2[i] );
 }
-
-// TEST(IntVector, MoveAssignOperator)
-// {
-//     // Range = the entire vector.
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-//     sc::vector<int> vec2;
-
-//     vec2 = std::move( vec );
-//     ASSERT_EQ( vec2.size(), 5 );
-//     ASSERT_FALSE( vec2.empty() );
-//     EXPECT_EQ( vec.size(), 0 );
-//     EXPECT_EQ( vec.capacity(), 0 );
-//     EXPECT_TRUE( vec.empty() );
-
-//     // CHeck whether the copy worked.
-//     for( auto i{0u} ; i < vec2.size() ; ++i )
-//         ASSERT_EQ( i+1, vec2[i] );
-// }
 
 TEST(IntVector, ListInitializerAssign)
 {
@@ -215,19 +185,19 @@ TEST(IntVector, PushBack)
         ASSERT_EQ( i+1, vec[i] );
 }
 
-// TEST(IntVector, PopBack)
-// {
-//     // #1 From an empty vector.
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+TEST(IntVector, PopBack)
+{
+    // #1 From an empty vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
 
-//     while( not vec.empty() )
-//     {
-//         vec.pop_back();
-//         // Checke whether we have the same list except for the last.
-//         for( auto i{0u} ; i < vec.size() ; ++i )
-//             ASSERT_EQ( i+1, vec[i] );
-//     }
-// }
+    while( not vec.empty() )
+    {
+        vec.pop_back();
+        // Checke whether we have the same list except for the last.
+        for( auto i{0u} ; i < vec.size() ; ++i )
+            ASSERT_EQ( i+1, vec[i] );
+    }
+}
 
 // TEST(IntVector, PopFront)
 // {

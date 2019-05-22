@@ -24,7 +24,6 @@ namespace sc{
 			static constexpr size_type initial_size=0; //!< Default value is 0.
 
 		public:
-			template< typename iT >
 			class my_iterator;
 
 			//=== Constructors
@@ -72,18 +71,18 @@ namespace sc{
 			}
 
 			//=== Iterators
-			my_iterator< T > begin()
+			my_iterator begin()
 			{
-				my_iterator<T> iter(&arr[0]);
+				my_iterator iter(&arr[0]);
 				return iter;
 			}
-			my_iterator< T > end()
+			my_iterator end()
 			{
-				my_iterator<T> iter(&arr[m_size]);
+				my_iterator iter(&arr[m_size]);
 				return iter;
 			}
-			my_iterator < const T > cbegin() const;
-			my_iterator < const T > cend() const;
+			my_iterator cbegin() const;
+			my_iterator cend() const;
 
 
 		public:
@@ -268,61 +267,107 @@ namespace sc{
 			
 			With this class we're trying to implement an iterator class for vectors.
 		*/
-		template < typename iT >
 		class my_iterator{
 			private:
-				iT * it; //!< Iterator pointer
-				typedef my_iterator<iT> iterator; 
+				T * it; //!< Iterator pointer
+				typedef my_iterator iterator; 
 
 			public:
 				//=== Alias
 				typedef size_t size_type; //!< Type of size.
 				
 				//=== Constructor
-				my_iterator(iT* it)
+				my_iterator(T* it)
 					:it{it}
 				{/*empty*/}
 
 				//=== Destructor
-				~my_iterator();
+				~my_iterator()
+				{/*empty*/}
 
 				//=== Operations
-				iterator insert ( iterator pos, const iT & value );
+				iterator insert ( iterator pos, const T & value );
 
 				template< typename InItr >
 				iterator insert( iterator pos, InItr first, InItr last );
 
-				iterator insert( my_iterator < const iT > pos, std::initializer_list< iT > ilist );
+				iterator insert( my_iterator pos, std::initializer_list< T > ilist );
 
 				iterator erase( iterator pos );
 
 				iterator erase( iterator first, iterator last );
 
-				void assign( size_type count, const iT& value );
+				void assign( size_type count, const T& value );
 
 				template< typename InItr >
 				void assign( InItr first, InItr last );
 
-				void assign( std::initializer_list< iT > ilist );
-/*
+				void assign( std::initializer_list< T > ilist );
+
 			public:
 				//=== Operators
-				iterator operator++();
-				iterator operator*();
-				iterator operator-();
-				friend iterator& operator+(int n, iterator it);
-				friend iterator operator+(iterator it, int n);
-				friend iterator& operator-(int n, iterator it);
-				friend iterator operator-(iterator it, int n);
-				operator->();
-				bool operator==(iterator& it2)
-				{
-					
+				iterator operator++(void)
+				{ return iterator( ++it ); }
+
+				iterator operator++(int)
+				{ 
+					iterator temp( it );
+					it++;
+					return temp;
 				}
-				bool operator!=(iterator& it2)
+
+				T& operator*()
+				{ return *it; }
+
+				iterator operator--(void)
+				{ return iterator( --it ); }
+
+				iterator operator--(int)
 				{
-				
-				}*/
+					iterator temp( it );
+					it--;
+					return temp;
+				}
+
+				friend iterator operator+(int n, iterator it)
+				{
+					for( int i = 0 ; i < n ; i++ )
+						it++;
+					return iterator( it );
+				}
+
+				friend iterator operator+(iterator it, int n)
+				{
+					for( int i = 0 ; i < n ; i++ )
+						it++;
+					return iterator( it );
+				}
+
+				friend iterator operator-(int n, iterator it)
+				{
+					for( int i = 0 ; i < n ; i++ )
+						it--;
+					return iterator( it );
+				}
+
+				friend iterator operator-(iterator it, int n)
+				{
+					for( int i = 0 ; i < n ; i++ )
+						it--;
+					return iterator( it );
+				}
+
+				friend size_type operator-(iterator it1, iterator it2)
+				{
+					return it1.it - it2.it;
+				}
+
+				//operator->();
+				bool operator==(iterator& it2)
+				{ return it == it2.it; }
+
+				bool operator!=(iterator& it2)
+				{ return it != it2.it; }
 		}; // class my_iterator
 		
 
@@ -330,42 +375,40 @@ namespace sc{
 			
 			With this class we're trying to implement an constant iterator class for vectors.
 		*/
-		
-		template< typename CiT >
-		class my_constiterator{
-			private:
-				CiT * it; //!< Constant iterator pointer
-				typedef my_constiterator< CiT > const_iterator;
+		// class my_constiterator{
+		// 	private:
+		// 		CiT * it; //!< Constant iterator pointer
+		// 		typedef my_constiterator< CiT > const_iterator;
 
-			public:
-				//=== Alias
-				typedef size_t size_type; //!< Type of Size
+		// 	public:
+		// 		//=== Alias
+		// 		typedef size_t size_type; //!< Type of Size
 
-				//=== Constructor
-				my_constiterator();
+		// 		//=== Constructor
+		// 		my_constiterator();
 
-				//=== Destructor
-				~my_constiterator();
+		// 		//=== Destructor
+		// 		~my_constiterator();
 
-				//=== Const Operations
-				const const_iterator insert( const_iterator pos, const CiT & value );
+		// 		//=== Const Operations
+		// 		const const_iterator insert( const_iterator pos, const CiT & value );
 
-				template< typename InItr >
-				const const_iterator insert( const_iterator pos, InItr first, InItr last );
+		// 		template< typename InItr >
+		// 		const const_iterator insert( const_iterator pos, InItr first, InItr last );
 
-				const const_iterator insert( my_constiterator < const CiT > pos, std::initializer_list< CiT > ilist );
+		// 		const const_iterator insert( my_constiterator < const CiT > pos, std::initializer_list< CiT > ilist );
 
-				const const_iterator erase( const_iterator pos );
+		// 		const const_iterator erase( const_iterator pos );
 
-				const const_iterator erase( const_iterator first, const_iterator last );
+		// 		const const_iterator erase( const_iterator first, const_iterator last );
 
-				void assign( size_type count, const CiT& value );
+		// 		void assign( size_type count, const CiT& value );
 
-				template< typename InItr >
-				void assign( InItr first, InItr last );
+		// 		template< typename InItr >
+		// 		void assign( InItr first, InItr last );
 
-				void assign( std::initializer_list< CiT > ilist );
-		}; // class my_constiterator
+		// 		void assign( std::initializer_list< CiT > ilist );
+		// }; // class my_constiterator
 
 	}; // class vector
 
