@@ -104,7 +104,25 @@ namespace sc{
 			bool empty( )
 			{return m_size == initial_size;}
 
-			void push_front( const T & value );
+			void push_front( const T & value )
+			{
+				if( m_size == m_capacity )
+				{
+					if( m_capacity != 0 )
+						reserve( m_capacity * 2 );
+					else
+						reserve( 1 );
+				}
+
+				vector<T> aux = *this;
+				delete arr;
+
+				arr = new T[m_capacity];
+				arr[0] = value;
+				m_size++;
+				for(size_type i{1u} ; i < m_size ; i++ )
+					arr[i] = aux.arr[i-1];
+			}
 
 			void push_back( const T & value )
 			{
@@ -135,7 +153,7 @@ namespace sc{
 
 				for( size_type i{0u}; i < m_size; i++ )
 				{
-					arr[i] = aux[i];
+					arr[i] = aux[i+1];
 				}
 			}
 

@@ -125,35 +125,35 @@ TEST(IntVector, Clear)
     EXPECT_TRUE( vec.empty() );
 }
 
-// TEST(IntVector, PushFront)
-// {
-//     // #1 From an empty vector.
-//     sc::vector<int> vec;
+TEST(IntVector, PushFront)
+{
+    // #1 From an empty vector.
+    sc::vector<int> vec;
 
-//     ASSERT_TRUE( vec.empty() );
-//     for ( auto i{0} ; i < 5 ; ++i )
-//     {
-//         vec.push_front( i+1 );
-//         ASSERT_EQ( vec.size(),  i+1 );
-//     }
-//     ASSERT_FALSE( vec.empty() );
+    ASSERT_TRUE( vec.empty() );
+    for ( auto i{0} ; i < 5 ; ++i )
+    {
+        vec.push_front( i+1 );
+        ASSERT_EQ( vec.size(),  i+1 );
+    }
+    ASSERT_FALSE( vec.empty() );
 
-//     for( auto i{4u} ; i >= vec.size() ; --i )
-//         ASSERT_EQ( i+1, vec[i] );
+    for( auto i{4u} ; i >= vec.size() ; --i )
+        ASSERT_EQ( i+1, vec[i] );
 
-//     // REmove all elements.
-//     vec.clear();
-//     ASSERT_TRUE( vec.empty()  );
-//     for ( auto i{0} ; i < 5 ; ++i )
-//     {
-//         vec.push_front( i+1 );
-//         ASSERT_EQ( vec.size(),  i+1 );
-//     }
-//     ASSERT_FALSE( vec.empty() );
+    // REmove all elements.
+    vec.clear();
+    ASSERT_TRUE( vec.empty()  );
+    for ( auto i{0} ; i < 5 ; ++i )
+    {
+        vec.push_front( i+1 );
+        ASSERT_EQ( vec.size(),  i+1 );
+    }
+    ASSERT_FALSE( vec.empty() );
 
-//     for( auto i{4u} ; i >= vec.size() ; --i )
-//         ASSERT_EQ( i+1, vec[i] );
-// }
+    for( auto i{4u} ; i >= vec.size() ; --i )
+        ASSERT_EQ( i+1, vec[i] );
+}
 
 TEST(IntVector, PushBack)
 {
@@ -199,22 +199,22 @@ TEST(IntVector, PopBack)
     }
 }
 
-// TEST(IntVector, PopFront)
-// {
-//     // #1 From an empty vector.
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+TEST(IntVector, PopFront)
+{
+    // #1 From an empty vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
 
-//     auto start{2};
-//     while( not vec.empty() )
-//     {
-//         vec.pop_front();
-//         // Checke whether we have the same list except for the last.
-//         for( auto i{0u} ; i < vec.size() ; ++i )
-//             ASSERT_EQ( start+i, vec[i] );
+    auto start{2};
+    while( not vec.empty() )
+    {
+        vec.pop_front();
+        // Checke whether we have the same list except for the last.
+        for( auto i{0u} ; i < vec.size() ; ++i )
+            ASSERT_EQ( start+i, vec[i] );
 
-//         start++;
-//     }
-// }
+        start++;
+    }
+}
 
 // TEST(IntVector, Front)
 // {
@@ -440,7 +440,7 @@ TEST(IntVector, PopBack)
 
 //     // In the middle
 //     vec1 = vec2;
-//     vec1.insert( std::next( vec1.begin(), 2 ), source.begin(), source.end() );
+//     vec1.insert( vec1.begin()+2, source.begin(), source.end() );
 //     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
 
 //     // At the end
@@ -450,7 +450,7 @@ TEST(IntVector, PopBack)
 
 //     // Outside
 //     vec1 = vec2;
-//     vec1.insert( std::next( vec1.end(), 2 ) , source.begin(), source.end() );
+//     vec1.insert( vec1.end()+2, source.begin(), source.end() );
 //     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 3, 4, 5 } ) );
 
 // }
@@ -468,7 +468,7 @@ TEST(IntVector, PopBack)
 
 //     // In the middle
 //     vec1 = vec2;
-//     vec1.insert( std::next( vec1.begin(), 2 ), { 6, 7, 8, 9, 10 } );
+//     vec1.insert( vec1.begin()+2, { 6, 7, 8, 9, 10 } );
 //     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
 
 //     // At the end
@@ -478,7 +478,7 @@ TEST(IntVector, PopBack)
 
 //     // Outside
 //     vec1 = vec2;
-//     vec1.insert( std::next( vec1.end(), 2 ) , { 6, 7, 8, 9, 10 } );
+//     vec1.insert( vec1.end()+2, { 6, 7, 8, 9, 10 } );
 //     ASSERT_EQ( vec1 , ( sc::vector<int>{ 1, 2, 3, 4, 5 } ) );
 // }
 
@@ -514,21 +514,21 @@ TEST(IntVector, PopBack)
 //     sc::vector<int> vec { 1, 2, 3, 4, 5 };
 
 //     // removing a segment from the beginning.
-//     auto past_last = vec.erase( vec.begin(), std::next(vec.begin(),3) );
+//     auto past_last = vec.erase( vec.begin(), vec.begin()+3 );
 //     ASSERT_EQ( vec.begin() , past_last );
 //     ASSERT_EQ( vec , ( sc::vector<int>{ 4, 5 } ) );
 //     ASSERT_EQ( vec.size() , 2 );
 
 //     // removing at the middle.
 //     vec = { 1, 2, 3, 4, 5 };
-//     past_last = vec.erase( std::next(vec.begin(),1), std::next(vec.begin(),4) );
-//     ASSERT_EQ( std::next(vec.begin(),1) , past_last );
+//     past_last = vec.erase( vec.begin()+1, vec.begin()+4 );
+//     ASSERT_EQ( vec.begin()+1, past_last );
 //     ASSERT_EQ( vec , ( sc::vector<int>{ 1, 5 } ) );
 //     ASSERT_EQ( vec.size() , 2 );
 
 //     // removing a segment that reached the end.
 //     vec = { 1, 2, 3, 4, 5 };
-//     past_last = vec.erase( std::next(vec.begin(),2), vec.end() );
+//     past_last = vec.erase( vec.begin()+2, vec.end() );
 //     ASSERT_EQ( vec.end() , past_last );
 //     ASSERT_EQ( vec , ( sc::vector<int>{ 1, 2 } ) );
 //     ASSERT_EQ( vec.size() , 2 );
@@ -554,14 +554,14 @@ TEST(IntVector, PopBack)
 
 //     // removing a single element in the middle.
 //     vec = { 1, 2, 3, 4, 5 };
-//     past_last = vec.erase( std::next(vec.begin(),2) );
+//     past_last = vec.erase( vec.begin()+2 );
 //     ASSERT_EQ( vec , ( sc::vector<int>{ 1, 2, 4, 5 } ) );
-//     ASSERT_EQ( std::next(vec.begin(),2) , past_last );
+//     ASSERT_EQ( vec.begin()+2 , past_last );
 //     ASSERT_EQ( vec.size() , 4 );
 
 //     // removing a single element at the end.
 //     vec = { 1, 2, 3, 4, 5 };
-//     past_last = vec.erase( std::next(vec.begin(),vec.size()-1 ) );
+//     past_last = vec.erase( vec.begin()+vec.size()-1 ) );
 //     ASSERT_EQ( vec , ( sc::vector<int>{ 1, 2, 3, 4 } ) );
 //     ASSERT_EQ( vec.end() , past_last );
 //     ASSERT_EQ( vec.size() , 4 );
