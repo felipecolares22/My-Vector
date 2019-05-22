@@ -86,7 +86,6 @@ namespace sc{
 			my_iterator < const T > cend() const;
 
 
-
 		public:
 			//=== Methods
 			/// Return the size of array.
@@ -108,7 +107,19 @@ namespace sc{
 
 			void push_front( const T & value );
 
-			void push_back( const T & value );
+			void push_back( const T & value )
+			{
+				if( m_size == m_capacity )
+				{
+					if( m_capacity != 0 )
+						reserve( m_capacity * 2 );
+					else
+						reserve( 1 );
+				}
+
+				arr[m_size] = value;
+				m_size++;
+			}
 
 			void pop_back( )
 			{

@@ -185,35 +185,35 @@ TEST(IntVector, Clear)
 //         ASSERT_EQ( i+1, vec[i] );
 // }
 
-// TEST(IntVector, PushBack)
-// {
-//     // #1 From an empty vector.
-//     sc::vector<int> vec;
+TEST(IntVector, PushBack)
+{
+    // #1 From an empty vector.
+    sc::vector<int> vec;
 
-//     ASSERT_TRUE( vec.empty() );
-//     for ( auto i{0} ; i < 5 ; ++i )
-//     {
-//         vec.push_back( i+1 );
-//         ASSERT_EQ( vec.size(),  i+1 );
-//     }
-//     ASSERT_FALSE( vec.empty() );
+    ASSERT_TRUE( vec.empty() );
+    for ( auto i{0} ; i < 5 ; ++i )
+    {
+        vec.push_back( i+1 );
+        ASSERT_EQ( vec.size(),  i+1 );
+    }
+    ASSERT_FALSE( vec.empty() );
 
-//     for( auto i{4u} ; i >= vec.size() ; --i )
-//         ASSERT_EQ( i+1, vec[i] );
+    for( auto i{4u} ; i >= vec.size() ; --i )
+        ASSERT_EQ( i+1, vec[i] );
 
-//     // REmove all elements.
-//     vec.clear();
-//     ASSERT_TRUE( vec.empty()  );
-//     for ( auto i{0} ; i < 5 ; ++i )
-//     {
-//         vec.push_back( i+1 );
-//         ASSERT_EQ( vec.size(),  i+1 );
-//     }
-//     ASSERT_FALSE( vec.empty() );
+    // REmove all elements.
+    vec.clear();
+    ASSERT_TRUE( vec.empty()  );
+    for ( auto i{0} ; i < 5 ; ++i )
+    {
+        vec.push_back( i+1 );
+        ASSERT_EQ( vec.size(),  i+1 );
+    }
+    ASSERT_FALSE( vec.empty() );
 
-//     for( auto i{4u} ; i >= vec.size() ; --i )
-//         ASSERT_EQ( i+1, vec[i] );
-// }
+    for( auto i{4u} ; i >= vec.size() ; --i )
+        ASSERT_EQ( i+1, vec[i] );
+}
 
 // TEST(IntVector, PopBack)
 // {
