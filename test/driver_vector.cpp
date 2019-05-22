@@ -30,15 +30,15 @@ TEST(IntVector, ConstructorSize)
 }
 
 
-// TEST(IntVector, ListConstructor)
-// {
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-//     ASSERT_EQ( vec.size(), 5 );
-//     EXPECT_FALSE( vec.empty() );
+TEST(IntVector, ListConstructor)
+{
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    ASSERT_EQ( vec.size(), 5 );
+    EXPECT_FALSE( vec.empty() );
 
-//     for( auto i{0u} ; i < vec.size() ; ++i )
-//         ASSERT_EQ( i+1, vec[i] );
-// }
+    for( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( i+1, vec[i] );
+}
 
 // TEST(IntVector, RangeConstructor)
 // {
@@ -60,52 +60,52 @@ TEST(IntVector, ConstructorSize)
 //         ASSERT_EQ( vec[i+1], vec3[i] );
 // }
 
-// TEST(IntVector, CopyConstructor)
-// {
-//     // Range = the entire vector.
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-//     sc::vector<int> vec2( vec );
-//     ASSERT_EQ( vec2.size(), 5 );
-//     EXPECT_FALSE( vec2.empty() );
+TEST(IntVector, CopyConstructor)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2( vec );
+    ASSERT_EQ( vec2.size(), 5 );
+    EXPECT_FALSE( vec2.empty() );
 
-//     // CHeck whether the copy worked.
-//     for( auto i{0u} ; i < vec2.size() ; ++i )
-//         ASSERT_EQ( i+1, vec2[i] );
+    // CHeck whether the copy worked.
+    for( auto i{0u} ; i < vec2.size() ; ++i )
+        ASSERT_EQ( i+1, vec2[i] );
 
-//     // Change the original vector and check
-//     // whether that also changes the second vec.
-//     vec[2] = 10;
-//     for( auto i{0u} ; i < vec.size() ; ++i )
-//         ASSERT_EQ( i+1, vec2[i] );
-// }
+    // Change the original vector and check
+    // whether that also changes the second vec.
+    vec[2] = 10;
+    for( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( i+1, vec2[i] );
+}
 
-// TEST(IntVector, MoveConstructor)
-// {
-//     // Range = the entire vector.
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-//     sc::vector<int> vec2( std::move( vec ) );
-//     ASSERT_EQ( vec2.size(), 5 );
-//     EXPECT_FALSE( vec2.empty() );
+TEST(IntVector, MoveConstructor)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2( std::move( vec ) );
+    ASSERT_EQ( vec2.size(), 5 );
+    EXPECT_FALSE( vec2.empty() );
 
-//     // CHeck whether the copy worked.
-//     for( auto i{0u} ; i < vec2.size() ; ++i )
-//         ASSERT_EQ( i+1, vec2[i] );
-// }
+    // CHeck whether the copy worked.
+    for( auto i{0u} ; i < vec2.size() ; ++i )
+        ASSERT_EQ( i+1, vec2[i] );
+}
 
-// TEST(IntVector, AssignOperator)
-// {
-//     // Range = the entire vector.
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-//     sc::vector<int> vec2;
+TEST(IntVector, AssignOperator)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2;
 
-//     vec2 = vec;
-//     ASSERT_EQ( vec2.size(), 5 );
-//     EXPECT_FALSE( vec2.empty() );
+    vec2 = vec;
+    ASSERT_EQ( vec2.size(), 5 );
+    EXPECT_FALSE( vec2.empty() );
 
-//     // CHeck whether the copy worked.
-//     for( auto i{0u} ; i < vec2.size() ; ++i )
-//         ASSERT_EQ( i+1, vec2[i] );
-// }
+    // CHeck whether the copy worked.
+    for( auto i{0u} ; i < vec2.size() ; ++i )
+        ASSERT_EQ( i+1, vec2[i] );
+}
 
 // TEST(IntVector, MoveAssignOperator)
 // {
@@ -125,35 +125,35 @@ TEST(IntVector, ConstructorSize)
 //         ASSERT_EQ( i+1, vec2[i] );
 // }
 
-// TEST(IntVector, ListInitializerAssign)
-// {
-//     // Range = the entire vector.
-//     sc::vector<int> vec = { 1, 2, 3, 4, 5 };
+TEST(IntVector, ListInitializerAssign)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec = { 1, 2, 3, 4, 5 };
 
-//     EXPECT_EQ( vec.size(), 5 );
-//     EXPECT_EQ( vec.capacity(), 5 );
-//     EXPECT_FALSE( vec.empty() );
+    EXPECT_EQ( vec.size(), 5 );
+    EXPECT_EQ( vec.capacity(), 5 );
+    EXPECT_FALSE( vec.empty() );
 
-//     // CHeck whether the copy worked.
-//     for( auto i{0u} ; i < vec.size() ; ++i )
-//         ASSERT_EQ( i+1, vec[i] );
-// }
+    // CHeck whether the copy worked.
+    for( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( i+1, vec[i] );
+}
 
-// TEST(IntVector, Clear)
-// {
-//     // Range = the entire vector.
-//     sc::vector<int> vec = { 1, 2, 3, 4, 5 };
+TEST(IntVector, Clear)
+{
+    // Range = the entire vector.
+    sc::vector<int> vec = { 1, 2, 3, 4, 5 };
 
-//     EXPECT_EQ( vec.size(), 5 );
-//     EXPECT_EQ( vec.capacity(), 5 );
-//     EXPECT_FALSE( vec.empty() );
+    EXPECT_EQ( vec.size(), 5 );
+    EXPECT_EQ( vec.capacity(), 5 );
+    EXPECT_FALSE( vec.empty() );
 
-//     vec.clear();
+    vec.clear();
 
-//     EXPECT_EQ( vec.size(), 0 );
-//     EXPECT_EQ( vec.capacity(), 5 );
-//     EXPECT_TRUE( vec.empty() );
-// }
+    EXPECT_EQ( vec.size(), 0 );
+    EXPECT_EQ( vec.capacity(), 5 );
+    EXPECT_TRUE( vec.empty() );
+}
 
 // TEST(IntVector, PushFront)
 // {

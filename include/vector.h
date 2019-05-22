@@ -41,7 +41,7 @@ namespace sc{
 			/// First last copy constructor
 			template< typename InputIt >
 			vector( InputIt first, InputIt last )
-				: m_capacity{(size_type)((last - first) * 2)}, m_size{(size_type)(last - first)}, arr{new T[m_capacity]}
+				: m_capacity{(size_type)(last - first)}, m_size{(size_type)(last - first)}, arr{new T[m_capacity]}
 			{
 				size_type count{0};
 				while(first != last)
@@ -58,7 +58,7 @@ namespace sc{
 
 			/// std::initializer_list copy constructor
 			vector( std::initializer_list<T> ilist )
-				: m_capacity{ilist.size() * 2}, m_size{ilist.size()}, arr{new T[m_capacity]}
+				: m_capacity{ilist.size()}, m_size{ilist.size()}, arr{new T[m_capacity]}
 			{
 				size_type count{0};
 				for( const int& e : ilist )
@@ -186,7 +186,7 @@ namespace sc{
 		public:
 			//=== Operators overload
 			/// Operator= overload for vectors
-			vector& operator=( vector& other )
+			vector& operator=( const vector& other )
 			{
 				if( m_size != initial_size )
 					delete arr;
@@ -196,9 +196,9 @@ namespace sc{
 				this->arr = new T[m_capacity];
 
 				for( size_type i{0u} ; i < m_size ; i++ )
-					arr[i] = other[i];
+					arr[i] = other.arr[i];
 
-				return other;
+				return *this;
 			}
 
 			/// Operator= overload for initializer_list
