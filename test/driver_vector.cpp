@@ -535,7 +535,7 @@ TEST(IntVector, ShrinkToFit)
 
 //     // removing a single element at the end.
 //     vec = { 1, 2, 3, 4, 5 };
-//     past_last = vec.erase( vec.begin()+vec.size()-1 ) );
+//     past_last = vec.erase( vec.begin()+vec.size()-1 );
 //     ASSERT_EQ( vec , ( sc::vector<int>{ 1, 2, 3, 4 } ) );
 //     ASSERT_EQ( vec.end() , past_last );
 //     ASSERT_EQ( vec.size() , 4 );

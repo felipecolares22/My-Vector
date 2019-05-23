@@ -374,7 +374,7 @@ namespace sc{
 
 			my_iterator erase( my_iterator pos )
 			{
-				size_type posi = posi - arr;
+				size_type posi = pos - arr;
 				for( size_type i{posi} ; i < m_size ; i++ )
 				{
 					arr[i-1] = arr[i];
@@ -382,7 +382,7 @@ namespace sc{
 
 				m_size--;
 
-				return iterator( &arr[posi-1] );
+				return my_iterator( &arr[posi-1] );
 			}
 
 			my_iterator erase( my_iterator first, my_iterator last )
@@ -395,7 +395,7 @@ namespace sc{
 					arr[i-1] = arr[i-1+range_size];
 				}
 
-				return iterator( &arr[posi] );
+				return my_iterator( &arr[posi] );
 			}
 
 			template< typename InItr >
@@ -633,6 +633,33 @@ namespace sc{
 		
 	}; // class vector
 
+	// /// Operator== overload for vectors comparison
+	// bool operator==( const vector& lhs, const vector& rhs )
+	// {
+	// 	if( lhs.size() == rhs.size() )
+	// 	{
+	// 		for(int i=0; i<(int)lhs.size(); i++)
+	// 		{
+	// 			if(lhs[i] != rhs[i]) return false;
+	// 		}
+	// 		return true;
+	// 	}
+	// 	else return false;
+	// }
+
+	// /// Operator!= overload for vectors comparison
+	// bool operator!=( const vector& lhs, const vector& rhs )
+	// {
+	// 	if( lhs.size() == rhs.size() )
+	// 	{
+	// 		for(int i=0; i<(int)lhs.size(); i++)
+	// 		{
+	// 			if(lhs[i] != rhs[i]) return true;
+	// 		}
+	// 		return false;
+	// 	}
+	// 	else return true;
+	// }
 
 } // namespace sc
 
