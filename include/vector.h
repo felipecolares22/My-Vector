@@ -318,6 +318,8 @@ namespace sc{
 				
 				arr[posi] = value;
 
+				m_size = total_size;
+
 				return pos;
 			}
 
@@ -341,6 +343,8 @@ namespace sc{
 					arr[posi++] = *(first++);
 				}
 
+				m_size = total_size;
+
 				return pos;
 			}
 
@@ -362,6 +366,8 @@ namespace sc{
 				{
 					arr[posi++] = e;
 				}
+
+				m_size = total_size;
 
 				return pos;
 			}
