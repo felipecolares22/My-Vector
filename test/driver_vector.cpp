@@ -236,33 +236,33 @@ TEST(IntVector, BackConst)
      ASSERT_EQ( vec2.back(), 'u' );
 }
 
-// TEST(IntVector, AssignCountValue)
-// {
-//     // #1 From an empty vector.
-//     sc::vector<long> vec{ 1, 2, 3, 4, 5 };
+TEST(IntVector, AssignCountValue)
+{
+    // #1 From an empty vector.
+    sc::vector<long> vec{ 1, 2, 3, 4, 5 };
 
-//     ASSERT_EQ( vec.size(), 5 );
-//     auto original_cap = vec.capacity();
+    ASSERT_EQ( vec.size(), 5 );
+    auto original_cap = vec.capacity();
 
-//     // Test assign with a count smaller than the original vec size.
-//     long value{-4};
-//     vec.assign( 3, value );
-//     ASSERT_EQ( vec.size(), 3 );
-//     // Capacity should be the same.
-//     EXPECT_EQ( vec.capacity(), original_cap );
-//     // Verify the elements.
-//     for ( auto i{0u} ; i < vec.size() ; ++i )
-//         ASSERT_EQ( value, vec[i] );
+    // Test assign with a count smaller than the original vec size.
+    long value{-4};
+    vec.assign( 3, value );
+    ASSERT_EQ( vec.size(), 3 );
+    // Capacity should be the same.
+    EXPECT_EQ( vec.capacity(), original_cap );
+    // Verify the elements.
+    for ( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( value, vec[i] );
 
-//     // Test assign with a count GREATER than the original vec size.
-//     long new_value{42};
-//     vec.assign( 10, new_value );
-//     ASSERT_EQ( vec.size(), 10 );
-//     EXPECT_GE( vec.capacity(), original_cap );
-//     // Verify the elements.
-//     for ( auto i{0u} ; i < vec.size() ; ++i )
-//         ASSERT_EQ( new_value, vec[i] );
-// }
+    // Test assign with a count GREATER than the original vec size.
+    long new_value{42};
+    vec.assign( 10, new_value );
+    ASSERT_EQ( vec.size(), 10 );
+    EXPECT_GE( vec.capacity(), original_cap );
+    // Verify the elements.
+    for ( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( new_value, vec[i] );
+}
 
 
 

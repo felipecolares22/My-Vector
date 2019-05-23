@@ -167,7 +167,20 @@ namespace sc{
 				return arr[0];
 			}
 
-			void assign( size_type count, const T & value );
+			void assign( size_type count, const T & value )
+			{
+				if( count > m_capacity ){
+					reserve( count );
+					this->m_capacity = count;
+				}
+
+				delete arr;
+				this->m_size = count;
+				this->arr = new T[m_capacity];
+
+				for( size_type i{0u} ; i < m_size ; i++ )
+					arr[i] = value;
+			}
 
 			/// Return the object at the index position.
 			T & operator[]( size_type pos )
