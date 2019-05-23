@@ -399,9 +399,28 @@ namespace sc{
 			}
 
 			template< typename InItr >
-			void assign( InItr first, InItr last );
+			void assign( InItr first, InItr last )
+			{
+				size_type range_size = last-first;
 
-			void assign( std::initializer_list< T > ilist );
+				if( range_size > m_capacity ){
+					reserve( range_size );
+					this->m_capacity = range_size;
+				}
+
+				delete arr;
+				this->m_size = range_size;
+				this->arr = new T[m_capacity];
+
+				size_type count{0u};
+				while( first != last )
+					arr[count++] = *(first++);
+			}
+
+			void assign( std::initializer_list< T > ilist )
+			{
+
+			}
 			
 			
 		protected:
