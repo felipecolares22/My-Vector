@@ -372,9 +372,31 @@ namespace sc{
 				return pos;
 			}
 
-			my_iterator erase( my_iterator pos );
+			my_iterator erase( my_iterator pos )
+			{
+				size_type posi = posi - arr;
+				for( size_type i{posi} ; i < m_size ; i++ )
+				{
+					arr[i-1] = arr[i];
+				}
 
-			my_iterator erase( my_iterator first, my_iterator last );
+				m_size--;
+
+				return iterator( &arr[posi-1] );
+			}
+
+			my_iterator erase( my_iterator first, my_iterator last )
+			{
+				size_type range_size = last - first;
+				size_type posi = first - arr;
+
+				for( size_type i{posi} ; i < m_size - range_size ; i++ )
+				{
+					arr[i-1] = arr[i-1+range_size];
+				}
+
+				return iterator( &arr[posi] );
+			}
 
 			template< typename InItr >
 			void assign( InItr first, InItr last );
@@ -475,6 +497,7 @@ namespace sc{
 				{
 					return iterator( it );
 				}
+
 				bool operator==( const iterator& it2) const
 				{ return it == it2.it; }
 
