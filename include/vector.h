@@ -60,7 +60,7 @@ namespace sc{
 				: m_capacity{ilist.size()}, m_size{ilist.size()}, arr{new T[m_capacity]}
 			{
 				size_type count{0};
-				for( const int& e : ilist )
+				for( const T& e : ilist )
 					arr[count++] = e;
 			}
 
@@ -259,7 +259,7 @@ namespace sc{
 				this->arr = new T[m_capacity];
 
 				size_type count{0};
-				for( const int& e : ilist )
+				for( const T& e : ilist )
 					arr[count++] = e;
 
 				return *this;
@@ -326,7 +326,26 @@ namespace sc{
 				iterator insert ( iterator pos, const T & value );
 
 				template< typename InItr >
-				iterator insert( iterator pos, InItr first, InItr last );
+				iterator insert( iterator pos, InItr first, InItr last )
+				{
+
+					vector<T> aux = *this;
+					size_type range_size = last-first; 
+					size_type posi = pos - arr;
+					size_type total_size = (size_type)(m_size + range_size);
+
+					reserve( total_size );
+
+					for( int i = m_size; i >= posi; i-- )
+					{
+						arr[i+range_size] = arr[i];
+					}
+					
+					while( first != last )
+					{
+						arr[posi++] = *(first++);
+					}
+				}
 
 				iterator insert( my_iterator pos, std::initializer_list< T > ilist );
 
@@ -415,41 +434,50 @@ namespace sc{
 			
 			With this class we're trying to implement an constant iterator class for vectors.
 		*/
-		// class my_constiterator{
-		// 	private:
-		// 		CiT * it; //!< Constant iterator pointer
-		// 		typedef my_constiterator< CiT > const_iterator;
 
-		// 	public:
-		// 		//=== Alias
-		// 		typedef size_t size_type; //!< Type of Size
+		/*
+		class my_constiterator{
+			private:
+				const T * it; //!< Constant iterator pointer
+				typedef my_constiterator const_iterator;
 
-		// 		//=== Constructor
-		// 		my_constiterator();
+			public:
+				//=== Alias
+				typedef size_t size_type; //!< Type of Size
 
-		// 		//=== Destructor
-		// 		~my_constiterator();
+				//=== Constructor
+				my_constiterator(const T* it)
+					:it{it}
+				{/*empty*/}
 
-		// 		//=== Const Operations
-		// 		const const_iterator insert( const_iterator pos, const CiT & value );
+				//=== Destructor
+				~my_constiterator()
+				{/*empty*/}
 
-		// 		template< typename InItr >
-		// 		const const_iterator insert( const_iterator pos, InItr first, InItr last );
+				//=== Const Operations
+				const const_iterator insert( const_iterator pos, const T & value )
+				{
+					
+				
+				}
 
-		// 		const const_iterator insert( my_constiterator < const CiT > pos, std::initializer_list< CiT > ilist );
+				template< typename InItr >
+				const const_iterator insert( const_iterator pos, InItr first, InItr last );
 
-		// 		const const_iterator erase( const_iterator pos );
+				const const_iterator insert( my_constiterator pos, std::initializer_list< T > ilist );
 
-		// 		const const_iterator erase( const_iterator first, const_iterator last );
+				const const_iterator erase( const_iterator pos );
 
-		// 		void assign( size_type count, const CiT& value );
+				const const_iterator erase( const_iterator first, const_iterator last );
 
-		// 		template< typename InItr >
-		// 		void assign( InItr first, InItr last );
+				void assign( size_type count, const T& value );
 
-		// 		void assign( std::initializer_list< CiT > ilist );
-		// }; // class my_constiterator
+				template< typename InItr >
+				void assign( InItr first, InItr last );
 
+				void assign( std::initializer_list< T > ilist );
+		}; // class my_constiterator
+		*/
 	}; // class vector
 
 
