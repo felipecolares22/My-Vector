@@ -264,6 +264,7 @@ TEST(IntVector, AssignCountValue)
         ASSERT_EQ( new_value, vec[i] );
 }
 
+// WITH ERRORS
 // TEST(IntVector, OperatorBracketsRHS)
 // {
 //     const sc::vector<int> vec { 1, 2, 3, 4, 5 };
@@ -284,6 +285,7 @@ TEST(IntVector, OperatorBracketsLHS)
         ASSERT_EQ( vec[i], vec2[i]);
 }
 
+// WITH ERRORS
 // TEST(IntVector, AtRHS)
 // {
 //     const sc::vector<int> vec { 1, 2, 3, 4, 5 };

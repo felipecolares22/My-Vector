@@ -419,7 +419,18 @@ namespace sc{
 
 			void assign( std::initializer_list< T > ilist )
 			{
+				if( ilist.size() > m_capacity ){
+					reserve( ilist.size() );
+					this->m_capacity = ilist.size();
+				}
 
+				delete arr;
+				this->m_size = ilist.size();
+				this->arr = new T[m_capacity];
+
+				size_type count{0u};
+				for( const T& e : ilist )
+					arr[count++] = e;
 			}
 			
 			
