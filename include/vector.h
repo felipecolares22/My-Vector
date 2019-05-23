@@ -157,9 +157,15 @@ namespace sc{
 				}
 			}
 
-			const T & back( ) const;
+			const T & back( ) const
+			{
+				return arr[m_size-1];
+			}
 
-			const T & front( ) const;
+			const T & front( ) const
+			{
+				return arr[0];
+			}
 
 			void assign( size_type count, const T & value );
 
@@ -380,7 +386,10 @@ namespace sc{
 					return it1.it - it2.it;
 				}
 
-				//operator->();
+				iterator operator->()
+				{
+					return iterator( it );
+				}
 				bool operator==(iterator& it2)
 				{ return it == it2.it; }
 

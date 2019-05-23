@@ -216,59 +216,26 @@ TEST(IntVector, PopFront)
     }
 }
 
-// TEST(IntVector, Front)
-// {
-//     // #1 From an empty vector.
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
 
-//     auto i{0};
-//     while( not vec.empty() )
-//     {
-//         auto current_size = vec.size();
-//         ASSERT_EQ( vec.front(), ++i );
-//         vec.front() = 100;
-//         ASSERT_EQ( current_size, vec.size() );
-//         ASSERT_EQ( vec[0], 100 );
+TEST(IntVector, FrontConst)
+{
+     // #1 From an empty vector.
+     const sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+     ASSERT_EQ( vec.front(), 1 );
 
-//         vec.pop_front();
-//     }
-// }
-// TEST(IntVector, FrontConst)
-// {
-//     // #1 From an empty vector.
-//     const sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-//     ASSERT_EQ( vec.front(), 1 );
+     const sc::vector<char> vec2{ 'a', 'e', 'i', 'o', 'u' };
+     ASSERT_EQ( vec2.front(), 'a' );
+}
 
-//     const sc::vector<char> vec2{ 'a', 'e', 'i', 'o', 'u' };
-//     ASSERT_EQ( vec2.front(), 'a' );
-// }
+TEST(IntVector, BackConst)
+{
+     // #1 From an empty vector.
+     const sc::vector<int> vec{ 1, 2, 3, 4, 5 };
+     ASSERT_EQ( vec.back(), 5 );
 
-// TEST(IntVector, Back)
-// {
-//     // #1 From an empty vector.
-//     sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-
-//     auto i{5};
-//     while( not vec.empty() )
-//     {
-//         auto current_size = vec.size();
-//         ASSERT_EQ( vec.back(), i-- );
-//         vec.back() = 100;
-//         ASSERT_EQ( current_size, vec.size() );
-//         ASSERT_EQ( vec[vec.size()-1], 100 );
-//         vec.pop_back();
-//     }
-// }
-
-// TEST(IntVector, BackConst)
-// {
-//     // #1 From an empty vector.
-//     const sc::vector<int> vec{ 1, 2, 3, 4, 5 };
-//     ASSERT_EQ( vec.back(), 5 );
-
-//     const sc::vector<char> vec2{ 'a', 'e', 'i', 'o', 'u' };
-//     ASSERT_EQ( vec2.back(), 'u' );
-// }
+     const sc::vector<char> vec2{ 'a', 'e', 'i', 'o', 'u' };
+     ASSERT_EQ( vec2.back(), 'u' );
+}
 
 // TEST(IntVector, AssignCountValue)
 // {
