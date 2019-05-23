@@ -171,7 +171,7 @@ namespace sc{
 
 			/// Return the object at the index position.
 			T & operator[]( size_type pos )
-			{return arr[pos];}
+			{ return arr[pos]; }
 
 			T & at( size_type pos )
 			{

@@ -216,7 +216,6 @@ TEST(IntVector, PopFront)
     }
 }
 
-
 TEST(IntVector, FrontConst)
 {
      // #1 From an empty vector.
@@ -276,16 +275,16 @@ TEST(IntVector, BackConst)
 //         ASSERT_EQ( vec[i], vec2[i]);
 // }
 
-// TEST(IntVector, OperatorBracketsLHS)
-// {
-//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
-//     sc::vector<int> vec2 { 10, 20, 30, 40, 50 };
+TEST(IntVector, OperatorBracketsLHS)
+{
+    sc::vector<int> vec { 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2 { 10, 20, 30, 40, 50 };
 
-//     for ( auto i{0u} ; i < vec.size() ; ++i )
-//         vec[i] = vec2[i];
-//     for ( auto i{0u} ; i < vec.size() ; ++i )
-//         ASSERT_EQ( vec[i], vec2[i]);
-// }
+    for ( auto i{0u} ; i < vec.size() ; ++i )
+        vec[i] = vec2[i];
+    for ( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( vec[i], vec2[i]);
+}
 
 // TEST(IntVector, AtRHS)
 // {
@@ -303,54 +302,54 @@ TEST(IntVector, BackConst)
 //     ASSERT_TRUE( worked );
 // }
 
-// TEST(IntVector, AtLHS)
-// {
-//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
-//     sc::vector<int> vec2 { 10, 20, 30, 40, 50 };
+TEST(IntVector, AtLHS)
+{
+    sc::vector<int> vec { 1, 2, 3, 4, 5 };
+    sc::vector<int> vec2 { 10, 20, 30, 40, 50 };
 
-//     for ( auto i{0u} ; i < vec.size() ; ++i )
-//         vec.at(i) = vec2.at(i);
-//     for ( auto i{0u} ; i < vec.size() ; ++i )
-//         ASSERT_EQ( vec.at(i), vec2.at(i) );
+    for ( auto i{0u} ; i < vec.size() ; ++i )
+        vec.at(i) = vec2.at(i);
+    for ( auto i{0u} ; i < vec.size() ; ++i )
+        ASSERT_EQ( vec.at(i), vec2.at(i) );
 
-//     bool worked{false};
-//     try { vec.at( vec.size() ) = 100; }
-//     catch( std::out_of_range & e )
-//     { worked = true; }
+    bool worked{false};
+    try { vec.at( vec.size() ) = 100; }
+    catch( std::out_of_range & e )
+    { worked = true; }
 
-//     ASSERT_TRUE( worked );
-// }
+    ASSERT_TRUE( worked );
+}
 
-// TEST(IntVector, Capacity)
-// {
-//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+TEST(IntVector, Capacity)
+{
+    sc::vector<int> vec { 1, 2, 3, 4, 5 };
 
-//     ASSERT_EQ( vec.capacity(), 5u );
-//     vec.reserve(10);
-//     ASSERT_EQ( vec.capacity(), 10u );
-//     vec.reserve(3); // Nothing happens here.
-//     ASSERT_EQ( vec.capacity(), 10u );
+    ASSERT_EQ( vec.capacity(), 5u );
+    vec.reserve(10);
+    ASSERT_EQ( vec.capacity(), 10u );
+    vec.reserve(3); // Nothing happens here.
+    ASSERT_EQ( vec.capacity(), 10u );
 
-//     auto i{0};
-//     for( const auto & e : vec )
-//         ASSERT_EQ( e, ++i );
-// }
+    auto i{0};
+    for( const auto & e : vec )
+        ASSERT_EQ( e, ++i );
+}
 
-// TEST(IntVector, ShrinkToFit)
-// {
-//     // #1 From an empty vector.
-//     sc::vector<int> vec { 1, 2, 3, 4, 5 };
+TEST(IntVector, ShrinkToFit)
+{
+    // #1 From an empty vector.
+    sc::vector<int> vec { 1, 2, 3, 4, 5 };
 
-//     ASSERT_EQ( vec.capacity(), 5u );
-//     vec.pop_back();
-//     vec.pop_back();
-//     ASSERT_EQ( vec.capacity(), 5u );
-//     vec.shrink_to_fit();
-//     ASSERT_EQ( vec.capacity(), 3 );
-//     auto i{0};
-//     for( const auto & e : vec )
-//         ASSERT_EQ( e , ++i );
-// }
+    ASSERT_EQ( vec.capacity(), 5u );
+    vec.pop_back();
+    vec.pop_back();
+    ASSERT_EQ( vec.capacity(), 5u );
+    vec.shrink_to_fit();
+    ASSERT_EQ( vec.capacity(), 3 );
+    auto i{0};
+    for( const auto & e : vec )
+        ASSERT_EQ( e , ++i );
+}
 
 // TEST(IntVector, OperatorEqual)
 // {
