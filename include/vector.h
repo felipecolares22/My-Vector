@@ -37,7 +37,7 @@ namespace sc{
 				: m_capacity{count}, m_size{initial_size}, arr{new T[count]}
 			{/*empty*/}
 
-			/// First last copy constructor
+			/// Constructor with elements in [first, last) range.
 			template< typename InputIt >
 			vector( InputIt first, InputIt last )
 				: m_capacity{(size_type)(last - first)}, m_size{(size_type)(last - first)}, arr{new T[m_capacity]}
@@ -47,7 +47,7 @@ namespace sc{
 					arr[count++] = *(first++);
 			}
 
-			/// Copy constructor
+			/// Copy constructor.
 			vector( const vector& other )
 				: m_capacity{other.capacity()}, m_size{other.size()}, arr{new T[m_capacity]}
 			{
@@ -55,7 +55,7 @@ namespace sc{
 					arr[i] = other.arr[i];
 			}
 
-			/// std::initializer_list copy constructor
+			/// std::initializer_list copy constructor.
 			vector( std::initializer_list<T> ilist )
 				: m_capacity{ilist.size()}, m_size{ilist.size()}, arr{new T[m_capacity]}
 			{
@@ -64,7 +64,7 @@ namespace sc{
 					arr[count++] = e;
 			}
 
-			/// Destructor
+			/// Destructor.
 			~vector( )
 			{
 				delete arr;
@@ -95,11 +95,11 @@ namespace sc{
 
 		public:
 			//=== Methods
-			/// Return the size of array.
+			/// Returns the size of array.
 			size_type size( ) const
 			{return this->m_size;}
 
-			/// Delete all array elements;
+			/// Delete all array elements.
 			void clear( )
 			{
 				delete arr;
@@ -108,10 +108,11 @@ namespace sc{
 				this->arr = new T[m_capacity];
 			}
 
-			/// Checks if the array is empty
+			/// Checks if the array is empty.
 			bool empty( )
 			{return m_size == initial_size;}
-
+			
+			/// Adds value to the front of the list.
 			void push_front( const T & value )
 			{
 				if( m_size == m_capacity )
@@ -132,6 +133,7 @@ namespace sc{
 					arr[i] = aux.arr[i-1];
 			}
 
+			/// Adds value to the end of the list.
 			void push_back( const T & value )
 			{
 				if( m_size == m_capacity )
@@ -145,12 +147,14 @@ namespace sc{
 				arr[m_size] = value;
 				m_size++;
 			}
-
+			
+			/// Removes the object at the end of the list.
 			void pop_back( )
 			{
 				m_size--;
 			}
 
+			/// Removes the object at the front of the list.
 			void pop_front( )
 			{
 				vector<T> aux = *this;
@@ -165,16 +169,19 @@ namespace sc{
 				}
 			}
 
+			/// Returns the object at the end of the list.
 			const T & back( ) const
 			{
 				return arr[m_size-1];
 			}
 
+			/// Returns the object at the beginning of the list.
 			const T & front( ) const
 			{
 				return arr[0];
 			}
 
+			/// Replaces the content of the list with count copies of value.
 			void assign( size_type count, const T & value )
 			{
 				if( count > m_capacity ){
@@ -194,6 +201,7 @@ namespace sc{
 			T & operator[]( size_type pos )
 			{ return arr[pos]; }
 
+			/// Returns the object at the index pos in the array.
 			T & at( size_type pos )
 			{
 				if( not (pos < m_size and pos >= 0) )
@@ -632,34 +640,6 @@ namespace sc{
 		}; // class my_iterator
 		
 	}; // class vector
-
-	// /// Operator== overload for vectors comparison
-	// bool operator==( const vector& lhs, const vector& rhs )
-	// {
-	// 	if( lhs.size() == rhs.size() )
-	// 	{
-	// 		for(int i=0; i<(int)lhs.size(); i++)
-	// 		{
-	// 			if(lhs[i] != rhs[i]) return false;
-	// 		}
-	// 		return true;
-	// 	}
-	// 	else return false;
-	// }
-
-	// /// Operator!= overload for vectors comparison
-	// bool operator!=( const vector& lhs, const vector& rhs )
-	// {
-	// 	if( lhs.size() == rhs.size() )
-	// 	{
-	// 		for(int i=0; i<(int)lhs.size(); i++)
-	// 		{
-	// 			if(lhs[i] != rhs[i]) return true;
-	// 		}
-	// 		return false;
-	// 	}
-	// 	else return true;
-	// }
 
 } // namespace sc
 
