@@ -71,21 +71,28 @@ namespace sc{
 			}
 
 			//=== Iterators
+			/// Returns an iterator pointing to the first item in the list
 			my_iterator begin()
 			{
 				my_iterator iter(&arr[0]);
 				return iter;
 			}
+
+			/// Returns a constant iterator pointing to the first item in the list.
 			my_iterator end()
 			{
 				my_iterator iter(&arr[m_size]);
 				return iter;
 			}
+
+			/// Returns an iterator pointing to the position just after the last element of the list.
 			my_iterator cbegin() const
 			{
 				my_const_iterator iter(&arr[0]);	
 				return iter;
 			}
+
+			/// Returns a constant iterator pointing to the position just after the last element of the list.
 			my_iterator cend() const
 			{
 				my_const_iterator iter(&arr[m_size]);
@@ -310,6 +317,7 @@ namespace sc{
 			}
 
 			//=== Operations
+			/// Adds value into the list before pos. Returns an iterator to the position of the inserted item.
 			my_iterator insert ( my_iterator pos, const T & value )
 			{
 				vector<T> aux = *this;
@@ -331,6 +339,7 @@ namespace sc{
 				return pos;
 			}
 
+			///inserts elements from the range [first; last) before pos.
 			template< typename InItr >
 			my_iterator insert( my_iterator pos, InItr first, InItr last )
 			{
@@ -356,6 +365,7 @@ namespace sc{
 				return pos;
 			}
 
+			/// Inserts elements from the initializer list ilist before pos.
 			my_iterator insert( my_iterator pos, std::initializer_list< T > ilist )
 			{
 				vector<T> aux = *this;
@@ -380,6 +390,7 @@ namespace sc{
 				return pos;
 			}
 
+			/// Removes the object at position pos. Returns an iterator to the element that follows pos before the call.
 			my_iterator erase( my_iterator pos )
 			{
 				size_type posi = pos - arr;
@@ -393,6 +404,7 @@ namespace sc{
 				return my_iterator( &arr[posi-1] );
 			}
 
+			/// Removes elements in the range [first; last).
 			my_iterator erase( my_iterator first, my_iterator last )
 			{
 				size_type range_size = last - first;
@@ -406,6 +418,7 @@ namespace sc{
 				return my_iterator( &arr[posi] );
 			}
 
+			/// Replaces the contents with count copies of value value.
 			template< typename InItr >
 			void assign( InItr first, InItr last )
 			{
@@ -425,6 +438,7 @@ namespace sc{
 					arr[count++] = *(first++);
 			}
 
+			/// Replaces the contents of the list with copies of the elements in the range [first; last).
 			void assign( std::initializer_list< T > ilist )
 			{
 				if( ilist.size() > m_capacity ){
